@@ -134,10 +134,8 @@ void TaskGenerator1_cleanup(void){
 /*********** Second task ***********/
 static void* SoundGenerator_Thread(void* _arg){
     while(!stoppingSound){
-
         // choose a number from 0-4
         int sound = rand() % 5; 
-
 
         // sound selection
         if(sound == RED){
@@ -156,7 +154,7 @@ static void* SoundGenerator_Thread(void* _arg){
             AudioMixer_queueSound(&yellowSound);
         }
 
-        Helper_sleepForMs(timeInterval);
+        Helper_sleepForMs(1500);
     }
 
     return NULL;
@@ -165,7 +163,6 @@ static void* SoundGenerator_Thread(void* _arg){
 
 static void SoundGenerator_init(void){
     stoppingSound = false;
-    timeInterval = INIT_TIME_INTERVAL; 
     
     // Launch thread:
     pthread_create(&soundId, NULL, SoundGenerator_Thread, NULL);

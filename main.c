@@ -31,7 +31,7 @@ int main()
 
     // Wait for user to obtain the right score to exit the game
     while (true) {
-        if (getSuccess() == SCORE) {
+        if (getSuccess() == 1) {
             break;
         }
     }
