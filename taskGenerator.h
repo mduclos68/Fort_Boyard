@@ -16,11 +16,11 @@
 #include "audioMixer.h"
 
 // Define audio files
-#define RED_AUDIO      "colour-wav-files/Rouge.m4a"
-#define BLUE_AUDIO     "colour-wav-files/Bleu.m4a"
-#define YELLOW_AUDIO   "colour-wav-files/Jaune.m4a"
-#define GREEN_AUDIO    "colour-wav-files/Vert.m4a"
-#define GREY_AUDIO     "colour-wav-files/Grey.m4a"
+#define RED_AUDIO      "colour-wav-files/Rouge.wav"
+#define BLUE_AUDIO     "colour-wav-files/Bleu.wav"
+#define YELLOW_AUDIO   "colour-wav-files/Jaune.wav"
+#define GREEN_AUDIO    "colour-wav-files/Vert.wav"
+#define GREY_AUDIO     "colour-wav-files/Grey.wav"
 
 
 void TaskGenerator_init(void);
