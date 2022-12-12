@@ -20,7 +20,7 @@
 #define BLUE_AUDIO     "colour-wav-files/Bleu.wav"
 #define YELLOW_AUDIO   "colour-wav-files/Jaune.wav"
 #define GREEN_AUDIO    "colour-wav-files/Vert.wav"
-#define GREY_AUDIO     "colour-wav-files/Grey.wav"
+#define GREY_AUDIO     "colour-wav-files/Gris.wav"
 
 
 void TaskGenerator_init(void);
