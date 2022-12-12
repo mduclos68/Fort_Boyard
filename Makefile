@@ -3,7 +3,7 @@
 
 # Edit this file to compile extra C files into their own programs.
 TARGET= fortBoyard
-SOURCES= helper.c audioMixer.c button.c main.c
+SOURCES= helper.c audioMixer.c button.c main.c gpio.c taskGenerator.c
 
 PUBDIR = $(HOME)/cmpt433/public/myApps
 OUTDIR = $(PUBDIR)
