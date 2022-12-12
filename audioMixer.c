@@ -293,8 +293,7 @@ void* playbackThread(void* _arg)
 {
 	while (!stopping) {
 		// Generate next block of audio
-		fillPlaybackBuffer(playbackBuffer, playbackBufferSize);
-		Interval_markInterval(INTERVAL_LOW_LEVEL_AUDIO);		
+		fillPlaybackBuffer(playbackBuffer, playbackBufferSize);		
 
 		// Output the audio
 		snd_pcm_sframes_t frames = snd_pcm_writei(handle,
