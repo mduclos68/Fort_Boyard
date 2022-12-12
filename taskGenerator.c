@@ -18,7 +18,7 @@ static void* TaskGenerator_Thread(void* _arg){
     long long t, t_diff;
     while(!stopping){
 
-        // choose a number for 0-4 to 
+        // choose a number for 0-4
         int colour = rand() % 5;
 
         // Red
