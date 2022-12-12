@@ -190,30 +190,6 @@ static void* TaskGenerator2_Thread(void* _arg){
     return NULL;
 }
 
-
-void TaskGenerator2_init(void){
-    stopping = false;
-    success = 0;
-    
-    // Launch thread:
-    pthread_create(&task2Id, NULL, TaskGenerator2_Thread, NULL);
-}
-
-
-void TaskGenerator2_cleanup(void){
-    stopping = true;
-
-    pthread_join(task2Id, NULL);
-
-    // Free all sound files
-    AudioMixer_freeWaveFileData(&redSound);
-    AudioMixer_freeWaveFileData(&greenSound);
-	AudioMixer_freeWaveFileData(&greySound); 
-    AudioMixer_freeWaveFileData(&yellowSound);
-    AudioMixer_freeWaveFileData(&blueSound);   
-}
-
-
 static void* SoundGenerator_Thread(void* _arg){
     while(!stopping){
 
@@ -225,14 +201,13 @@ static void* SoundGenerator_Thread(void* _arg){
         if(sound == RED){
             AudioMixer_queueSound(&redSound);
         }
-        else if(colour == BLUE){
+        else if(sound == BLUE){
             AudioMixer_queueSound(&blueSound);
-
         }
-        else if(colour == GREY){
+        else if(sound == GREY){
             AudioMixer_queueSound(&greySound);
         }
-        else if(colour == GREEN){
+        else if(sound == GREEN){
             AudioMixer_queueSound(&greenSound);
         }
         else{
