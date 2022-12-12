@@ -93,8 +93,11 @@ static void* TaskGenerator_Thread(void* _arg){
 
 void TaskGenerator_init(void){
     // Initialize audio and button
+    fprintf("1\n");
     AudioMixer_init();
+    fprintf("2\n");
     Button_init();
+        fprintf("3\n");
 
     // Open all sound files
     AudioMixer_readWaveFileIntoMemory(RED_AUDIO, &redSound);
