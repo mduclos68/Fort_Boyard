@@ -157,7 +157,10 @@ static void* SoundGenerator_Thread(void* _arg){
         }
 
         Helper_sleepForMs(timeInterval);
-        timeInterval = 0.85*timeInterval;
+        
+        if (timeInterval>800){
+            timeInterval = 0.85*timeInterval;
+        }
     }
 
     return NULL;
