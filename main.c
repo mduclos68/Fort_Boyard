@@ -22,11 +22,10 @@ int main()
     printf("Tu dois obtenir un score de %d pour réussir cette épreuve. Bonne chance!\n", SCORE);
     Helper_sleepForMs(2000);
 
-    // initialize task generator
-    TaskGenerator_init();
-    // Initialize audio and button
+    // initialize task generator, audio and button
     AudioMixer_init();
     Button_init();
+    TaskGenerator_init();
 
     // Wait for user to obtain the right score to exit the game
     while (true) {
@@ -36,10 +35,12 @@ int main()
         }
     }
 
-    // cleanup audio and button
+    printf("Félicitation, tu as réussi ton épreuve\n");
+
+
+    // cleanup audio, button and task generator
     AudioMixer_cleanup(); 
     Button_cleanup();
-    // Stops the task generator
     TaskGenerator_cleanup();
 
     return 0;
