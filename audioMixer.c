@@ -1,7 +1,6 @@
 // Complete implementation of an audio mixer. 
 // Note: Generates low latency audio on BeagleBone Black; higher latency found on host.
 #include "audioMixer.h"
-#include "intervalTimer.h"
 
 #include <alsa/asoundlib.h>
 #include <stdbool.h>

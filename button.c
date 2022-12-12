@@ -58,6 +58,7 @@ static void* buttonThread(void* _arg){
         }
 
     }
+    return NULL;
 }
 
 

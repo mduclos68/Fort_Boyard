@@ -26,4 +26,6 @@ void TaskGenerator_init(void);
 
 void TaskGenerator_cleanup(void);
 
+int getSuccess(void);
+
 #endif
