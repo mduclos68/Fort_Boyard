@@ -2,7 +2,7 @@
 
 // define thread variables
 static bool stopping = false;
-static pthread_t task1Id, task2Id;
+static pthread_t task1Id, task2Id, soundId;
 
 // Define pSounds
 static wavedata_t redSound, blueSound, greenSound, greySound, yellowSound;
@@ -137,7 +137,6 @@ static void* TaskGenerator2_Thread(void* _arg){
 
         // choose a number from 0-4
         int colour = rand() % 5;
-        int sound = rand() % 5; 
 
         // Colour Selection
         if(colour == RED){
@@ -156,27 +155,6 @@ static void* TaskGenerator2_Thread(void* _arg){
             printf("Jaune\n");
         }
 
-        // sound selection
-        if(sound == RED){
-            AudioMixer_queueSound(&redSound);
-        }
-        else if(colour == BLUE){
-            AudioMixer_queueSound(&blueSound);
-
-        }
-        else if(colour == GREY){
-            AudioMixer_queueSound(&greySound);
-        }
-        else if(colour == GREEN){
-            AudioMixer_queueSound(&greenSound);
-        }
-        else{
-            AudioMixer_queueSound(&yellowSound);
-        }
-
-
-        Helper_sleepForMs(200);
-
         // Wait for button press
         while(true){
             if (isButtonPressed()){
@@ -189,12 +167,13 @@ static void* TaskGenerator2_Thread(void* _arg){
         if(goodButton){
             // add to success count
             success++;
+            AudioMixer_queueSound(&dingSound);
             printf("---\n");
-            Helper_sleepForMs(INIT_TIME_INTERVAL);
         }
         else{
             printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
             
+            AudioMixer_queueSound(&buzzerSound);
             success = 0;
 
             Helper_sleepForMs(500);
@@ -225,6 +204,63 @@ void TaskGenerator2_cleanup(void){
     stopping = true;
 
     pthread_join(task2Id, NULL);
+
+    // Free all sound files
+    AudioMixer_freeWaveFileData(&redSound);
+    AudioMixer_freeWaveFileData(&greenSound);
+	AudioMixer_freeWaveFileData(&greySound); 
+    AudioMixer_freeWaveFileData(&yellowSound);
+    AudioMixer_freeWaveFileData(&blueSound);   
+}
+
+
+static void* SoundGenerator_Thread(void* _arg){
+    while(!stopping){
+
+        // choose a number from 0-4
+        int sound = rand() % 5; 
+
+
+        // sound selection
+        if(sound == RED){
+            AudioMixer_queueSound(&redSound);
+        }
+        else if(colour == BLUE){
+            AudioMixer_queueSound(&blueSound);
+
+        }
+        else if(colour == GREY){
+            AudioMixer_queueSound(&greySound);
+        }
+        else if(colour == GREEN){
+            AudioMixer_queueSound(&greenSound);
+        }
+        else{
+            AudioMixer_queueSound(&yellowSound);
+        }
+
+        Helper_sleepForMs(1000);
+    }
+
+    return NULL;
+}
+
+
+void TaskGenerator2_init(void){
+    stopping = false;
+    success = 0;
+    
+    // Launch thread:
+    pthread_create(&task2Id, NULL, TaskGenerator2_Thread, NULL);
+    pthread_create(&soundId, NULL, SoundGenerator_Thread, NULL);
+}
+
+
+void TaskGenerator2_cleanup(void){
+    stopping = true;
+
+    pthread_join(task2Id, NULL);
+    pthread_join(soundId, NULL);
 
     // Free all sound files
     AudioMixer_freeWaveFileData(&redSound);
