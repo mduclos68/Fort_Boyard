@@ -74,11 +74,11 @@ static void* TaskGenerator_Thread(void* _arg){
             
         }
         else{
-            if ((!goodButton)){
-                printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
+            if ((!onTime)){
+                printf("TROP LENT!!!\nTu t'es rendu à %d, recommence!\n", success);
             }
             else{
-                printf("TROP LENT!!!\nTu t'es rendu à %d, recommence!\n", success);
+                printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
             }
             
             success = 0;
