@@ -168,6 +168,7 @@ static void* TaskGenerator2_Thread(void* _arg){
             // add to success count
             success++;
             AudioMixer_queueSound(&dingSound);
+            Helper_sleepForMs(500);
             printf("---\n");
         }
         else{
