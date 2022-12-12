@@ -13,6 +13,7 @@
 
 #include "helper.h"
 #include "button.h"
+#include "audioMixer.h"
 
 // Define audio files
 #define RED_AUDIO      "colour-wav-files/Rouge.m4a"

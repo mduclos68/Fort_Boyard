@@ -16,4 +16,10 @@ void sleepForMs(long long delayInMs);
 // Helper function that gets the current time in Ms
 long long getTimeInMs(void);
 
+void Helper_runCommand(char* command);
+
+// Helper function that reads from a file specified 
+int Helper_readFromFile(char *fileName);
+
+void Helper_writeToFile(char *fileName, char* message);
 #endif

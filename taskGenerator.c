@@ -61,17 +61,17 @@ static void* TaskGenerator_Thread(void* _arg){
             t_diff = getTimeInMs() - t;  
         }
 
-        bool rightButton = rightButton(colour);
+        bool goodButton = rightButton(colour);
         bool onTime = (t_diff < timeInterval); 
         
-        if(rightButton && onTime){
+        if(goodButton && onTime){
             // add to success count
             success++;
             // reduce time interval
             timeInterval = 0.95 * timeInterval;
         }
         else{
-            if ((!rightButton)){
+            if ((!goodButton)){
                 printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
             }
             else{
