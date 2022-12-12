@@ -21,11 +21,17 @@
 #define YELLOW_AUDIO   "colour-wav-files/Jaune.wav"
 #define GREEN_AUDIO    "colour-wav-files/Vert.wav"
 #define GREY_AUDIO     "colour-wav-files/Gris.wav"
+#define BUZZER_AUDIO   "colour-wav-files/buzzer.wav"
+#define WIN_AUDIO      "colour-wav-files/win.wav"
+#define DING_AUDIO     "colour-wav-files/ding.wav"
 
+void TaskGenerator1_init(void);
 
-void TaskGenerator_init(void);
+void TaskGenerator1_cleanup(void);
 
-void TaskGenerator_cleanup(void);
+void TaskGenerator2_init(void);
+
+void TaskGenerator2_cleanup(void);
 
 int getSuccess(void);
 
