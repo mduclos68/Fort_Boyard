@@ -67,8 +67,10 @@ static void* TaskGenerator_Thread(void* _arg){
         if(goodButton && onTime){
             // add to success count
             success++;
+            Helper_sleepForMs(timeInterval);
             // reduce time interval
             timeInterval = 0.95 * timeInterval;
+            
         }
         else{
             if ((!goodButton)){
