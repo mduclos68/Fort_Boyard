@@ -52,7 +52,7 @@ static void* TaskGenerator1_Thread(void* _arg){
         }
 
 
-        Helper_sleepForMs(200);
+        Helper_sleepForMs(250);
 
         // Get time
         t = getTimeInMs();
@@ -133,7 +133,7 @@ void TaskGenerator1_cleanup(void){
 
 /*********** Second task ***********/
 static void* SoundGenerator_Thread(void* _arg){
-    while(!stopping){
+    while(!stoppingSound){
 
         // choose a number from 0-4
         int sound = rand() % 5; 
@@ -236,6 +236,8 @@ static void* TaskGenerator2_Thread(void* _arg){
             Helper_sleepForMs(1000);
         }
     }
+    
+    AudioMixer_queueSound(&winSound);
 
     return NULL;
 }
