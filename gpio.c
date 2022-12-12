@@ -5,9 +5,9 @@
 #include "gpio.h"
 
 // Config pin for GPIO
-void GPIO_configPin(int pinNum){
+void GPIO_configPin(char* pinNum){
     char command[35]; // TODO: hardcode 35
-    snprintf(command, 35, "config-pin %d gpio", pinNum);
+    snprintf(command, 35, "config-pin %s gpio", pinNum);
     Helper_runCommand(command);
     return;
 }

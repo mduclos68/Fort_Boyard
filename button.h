@@ -20,6 +20,12 @@
 #define GREEN_GPIO  48
 #define GREY_GPIO   60
 
+#define RED_PIN    "p9.11"
+#define BLUE_PIN   "p9.14"
+#define YELLOW_PIN "p9.13"
+#define GREEN_PIN  "p9.15"
+#define GREY_PIN   "p9.12"
+
 #define RED     0
 #define BLUE    1
 #define GREY    2

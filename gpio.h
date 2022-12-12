@@ -13,7 +13,7 @@
 #include "helper.h"
 
 // Config pin for GPIO
-void GPIO_configPin(int pinNum);
+void GPIO_configPin(char* pinNum);
 
 // Configure pin for input
 void GPIO_setForInput(int gpioNum);
