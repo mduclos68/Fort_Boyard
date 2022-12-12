@@ -132,6 +132,51 @@ void TaskGenerator1_cleanup(void){
 
 
 /*********** Second task ***********/
+static void* SoundGenerator_Thread(void* _arg){
+    while(!stopping){
+
+        // choose a number from 0-4
+        int sound = rand() % 5; 
+
+
+        // sound selection
+        if(sound == RED){
+            AudioMixer_queueSound(&redSound);
+        }
+        else if(sound == BLUE){
+            AudioMixer_queueSound(&blueSound);
+        }
+        else if(sound == GREY){
+            AudioMixer_queueSound(&greySound);
+        }
+        else if(sound == GREEN){
+            AudioMixer_queueSound(&greenSound);
+        }
+        else{
+            AudioMixer_queueSound(&yellowSound);
+        }
+
+        Helper_sleepForMs(1000);
+    }
+
+    return NULL;
+}
+
+
+static void SoundGenerator_init(void){
+    stoppingSound = false;
+    
+    // Launch thread:
+    pthread_create(&soundId, NULL, SoundGenerator_Thread, NULL);
+}
+
+
+static void SoundGenerator_cleanup(void){
+    stoppingSound = true;
+
+    pthread_join(soundId, NULL);  
+}
+
 
 static void* TaskGenerator2_Thread(void* _arg){
     while(!stopping){
@@ -195,49 +240,6 @@ static void* TaskGenerator2_Thread(void* _arg){
     return NULL;
 }
 
-static void* SoundGenerator_Thread(void* _arg){
-    while(!stopping){
-
-        // choose a number from 0-4
-        int sound = rand() % 5; 
-
-
-        // sound selection
-        if(sound == RED){
-            AudioMixer_queueSound(&redSound);
-        }
-        else if(sound == BLUE){
-            AudioMixer_queueSound(&blueSound);
-        }
-        else if(sound == GREY){
-            AudioMixer_queueSound(&greySound);
-        }
-        else if(sound == GREEN){
-            AudioMixer_queueSound(&greenSound);
-        }
-        else{
-            AudioMixer_queueSound(&yellowSound);
-        }
-
-        Helper_sleepForMs(1000);
-    }
-
-    return NULL;
-}
-
-
-static void SoundGenerator_init(void){
-    stoppingSound = false;
-    
-    // Launch thread:
-    pthread_create(&soundId, NULL, SoundGenerator_Thread, NULL);
-}
-
-static void SoundGenerator_cleanup(void){
-    stoppingSound = true;
-
-    pthread_join(soundId, NULL);  
-}
 
 void TaskGenerator2_init(void){
     stopping = false;
