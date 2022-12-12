@@ -157,10 +157,6 @@ static void* SoundGenerator_Thread(void* _arg){
         }
 
         Helper_sleepForMs(timeInterval);
-        
-        if (timeInterval>800){
-            timeInterval = 0.85*timeInterval;
-        }
     }
 
     return NULL;
@@ -185,10 +181,10 @@ static void SoundGenerator_cleanup(void){
 
 static void* TaskGenerator2_Thread(void* _arg){
 
-    SoundGenerator_init();
-        
     while(!stopping){
 
+        SoundGenerator_init();
+        
         // choose a number from 0-4
         int colour = rand() % 5;
 
