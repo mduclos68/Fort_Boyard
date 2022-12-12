@@ -156,7 +156,8 @@ static void* SoundGenerator_Thread(void* _arg){
             AudioMixer_queueSound(&yellowSound);
         }
 
-        Helper_sleepForMs(1000);
+        Helper_sleepForMs(timeInterval);
+        timeInterval = 0.85*timeInterval;
     }
 
     return NULL;
@@ -165,6 +166,7 @@ static void* SoundGenerator_Thread(void* _arg){
 
 static void SoundGenerator_init(void){
     stoppingSound = false;
+    timeInterval = INIT_TIME_INTERVAL; 
     
     // Launch thread:
     pthread_create(&soundId, NULL, SoundGenerator_Thread, NULL);
@@ -179,9 +181,10 @@ static void SoundGenerator_cleanup(void){
 
 
 static void* TaskGenerator2_Thread(void* _arg){
-    while(!stopping){
 
-        SoundGenerator_init();
+    SoundGenerator_init();
+        
+    while(!stopping){
 
         // choose a number from 0-4
         int colour = rand() % 5;
@@ -223,6 +226,7 @@ static void* TaskGenerator2_Thread(void* _arg){
             printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
             
             SoundGenerator_cleanup();
+
             AudioMixer_queueSound(&buzzerSound);
             success = 0;
 
@@ -234,9 +238,11 @@ static void* TaskGenerator2_Thread(void* _arg){
                 }
             }            
             Helper_sleepForMs(1000);
+            SoundGenerator_init();
         }
     }
     
+    SoundGenerator_cleanup();
     AudioMixer_queueSound(&winSound);
 
     return NULL;
