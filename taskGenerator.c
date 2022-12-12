@@ -52,6 +52,9 @@ static void* TaskGenerator_Thread(void* _arg){
             AudioMixer_queueSound(&yellowSound);
         }
 
+
+        Helper_sleepForMs(200);
+        
         // Get time
         t = getTimeInMs();
         t_diff = 0;
