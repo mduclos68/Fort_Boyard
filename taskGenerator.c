@@ -10,7 +10,7 @@ static wavedata_t buzzerSound, dingSound, winSound;
 
 static int success = 0;
 
-#define INIT_TIME_INTERVAL 1500; // 5 seconds
+#define INIT_TIME_INTERVAL 1500 // 5 seconds
 static long long timeInterval = INIT_TIME_INTERVAL; 
 
 
