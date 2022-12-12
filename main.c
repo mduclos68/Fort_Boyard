@@ -24,6 +24,9 @@ int main()
 
     // initialize task generator
     TaskGenerator_init();
+    // Initialize audio and button
+    AudioMixer_init();
+    Button_init();
 
     // Wait for user to obtain the right score to exit the game
     while (true) {
@@ -33,6 +36,9 @@ int main()
         }
     }
 
+    // cleanup audio and button
+    AudioMixer_cleanup(); 
+    Button_cleanup();
     // Stops the task generator
     TaskGenerator_cleanup();
 

@@ -22,9 +22,9 @@ LFLAGS = -L$(HOME)/cmpt433/public/asound_lib_BBB
 # -pg for supporting gprof profiling.
 #CFLAGS += -pg
 
-all: beatbox wav
+all: fortBoyard wav
 
-beatbox:
+fortBoyard:
 	$(CC_C) $(CFLAGS) $(SOURCES) -o $(OUTDIR)/$(TARGET) $(LFLAGS) -lpthread -lasound
 
 clean:

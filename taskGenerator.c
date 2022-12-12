@@ -92,12 +92,6 @@ static void* TaskGenerator_Thread(void* _arg){
 
 
 void TaskGenerator_init(void){
-    // Initialize audio and button
-    printf("1\n");
-    AudioMixer_init();
-    printf("2\n");
-    Button_init();
-    printf("3\n");
 
     // Open all sound files
     AudioMixer_readWaveFileIntoMemory(RED_AUDIO, &redSound);
@@ -121,11 +115,7 @@ void TaskGenerator_cleanup(void){
     AudioMixer_freeWaveFileData(&greenSound);
 	AudioMixer_freeWaveFileData(&greySound); 
     AudioMixer_freeWaveFileData(&yellowSound);
-    AudioMixer_freeWaveFileData(&blueSound);
-
-    // cleanup audio and button
-    AudioMixer_cleanup(); 
-    Button_cleanup();   
+    AudioMixer_freeWaveFileData(&blueSound);   
 }
 
 
