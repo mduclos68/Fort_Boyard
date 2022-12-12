@@ -90,7 +90,7 @@ static void* TaskGenerator1_Thread(void* _arg){
             Helper_sleepForMs(500);
             printf("Pèse sur un bouton pour recommencer.\n");
             while(true){
-                if (!isButtonPressed()){
+                if (isButtonPressed()){
                     break;
                 }
             }            
@@ -179,7 +179,7 @@ static void* TaskGenerator2_Thread(void* _arg){
 
         // Wait for button press
         while(true){
-            if (!isButtonPressed()){
+            if (isButtonPressed()){
                 break;
             }
         } 
@@ -200,7 +200,7 @@ static void* TaskGenerator2_Thread(void* _arg){
             Helper_sleepForMs(500);
             printf("Pèse sur un bouton pour recommencer.\n");
             while(true){
-                if (!isButtonPressed()){
+                if (isButtonPressed()){
                     break;
                 }
             }            
