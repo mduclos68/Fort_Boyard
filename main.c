@@ -23,7 +23,7 @@ int main()
     Helper_sleepForMs(2000);
 
     // initialize task generator
-    void TaskGenerator_init(void);
+    TaskGenerator_init();
 
     // Wait for user to obtain the right score to exit the game
     while (true) {
@@ -34,7 +34,7 @@ int main()
     }
 
     // Stops the task generator
-    void TaskGenerator_cleanup();
+    TaskGenerator_cleanup();
 
     return 0;
 }
