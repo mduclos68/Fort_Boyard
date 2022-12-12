@@ -70,7 +70,7 @@ static void* TaskGenerator_Thread(void* _arg){
             printf("---\n");
             Helper_sleepForMs(timeInterval);
             // reduce time interval
-            timeInterval = 0.85 * timeInterval;
+            timeInterval = 0.90 * timeInterval;
             
         }
         else{

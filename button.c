@@ -14,6 +14,7 @@ bool rightButton(int colourWanted){
     if (colourWanted == colourSelected){
         return true;
     }
+    buttonPressed = false;
     return false;
 }
 
