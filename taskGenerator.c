@@ -9,7 +9,7 @@ static wavedata_t redSound, blueSound, greenSound, greySound, yellowSound;
 
 static int success = 0;
 
-#define INIT_TIME_INTERVAL 2000; // 5 seconds
+#define INIT_TIME_INTERVAL 1500; // 5 seconds
 static long long timeInterval = INIT_TIME_INTERVAL; 
 
 
@@ -70,7 +70,7 @@ static void* TaskGenerator_Thread(void* _arg){
             printf("---\n");
             Helper_sleepForMs(timeInterval);
             // reduce time interval
-            timeInterval = 0.95 * timeInterval;
+            timeInterval = 0.85 * timeInterval;
             
         }
         else{

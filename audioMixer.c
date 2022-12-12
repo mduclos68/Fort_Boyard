@@ -170,8 +170,6 @@ void AudioMixer_queueSound(wavedata_t *pSound)
 
 void AudioMixer_cleanup(void)
 {
-	printf("Stopping audio...\n");
-
 	// Stop the PCM generation thread
 	stopping = true;
 	pthread_join(playbackThreadId, NULL);
@@ -186,7 +184,6 @@ void AudioMixer_cleanup(void)
 	free(playbackBuffer);
 	playbackBuffer = NULL;
 
-	printf("Done stopping audio...\n");
 	fflush(stdout);
 }
 
