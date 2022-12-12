@@ -64,11 +64,11 @@ static void* buttonThread(void* _arg){
 
 void Button_init(void){
     // Config pins for GPIO
-    GPIO_configPin(RED_GPIO);
-    GPIO_configPin(BLUE_GPIO);
-    GPIO_configPin(YELLOW_GPIO);
-    GPIO_configPin(GREEN_GPIO);
-    GPIO_configPin(GREY_GPIO);
+    GPIO_configPin(RED_PIN);
+    GPIO_configPin(BLUE_PIN);
+    GPIO_configPin(YELLOW_PIN);
+    GPIO_configPin(GREEN_PIN);
+    GPIO_configPin(GREY_PIN);
 
     // Configure pin for input
     GPIO_setForInput(RED_GPIO);
