@@ -84,6 +84,8 @@ static void* TaskGenerator_Thread(void* _arg){
             sleepForMs(2000);
         }
     }
+
+    return NULL;
 }
 
 
