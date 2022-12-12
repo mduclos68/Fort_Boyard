@@ -20,7 +20,7 @@
 int main()
 {    
     printf("Tu dois obtenir un score de %d pour réussir cette épreuve. Bonne chance!\n", SCORE);
-    sleepForMs(2000);
+    Helper_sleepForMs(2000);
 
     // initialize task generator
     void TaskGenerator_init(void);
