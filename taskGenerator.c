@@ -245,7 +245,7 @@ static void* TaskGenerator2_Thread(void* _arg){
             printf("---\n");
 
             // reduce time interval
-            timeInterval = 0.95 * timeInterval;
+            timeInterval = 0.92 * timeInterval;
         }
         else{
             if ((!onTime)){
