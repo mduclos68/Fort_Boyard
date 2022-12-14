@@ -33,21 +33,21 @@ int main()
     Tu dois obtenir 10 bons résultats de suite pour passé à l'étape suivante. Je te préviens, plus tu avance 
     dans le jeu, plus la candence augmentera. Bonne chance!
     */
-    /*Helper_sleepForMs(2000); 
+    Helper_sleepForMs(2000); 
 
     printf("Tu dois obtenir un score de %d pour réussir cette épreuve. Bonne chance!\n", SCORE);
     TaskGenerator1_init();
 
-    // Wait for user to obtain the right score to exit the game
+    /*// Wait for user to obtain the right score to exit the game
     while (true) {
         if (getSuccess() == SCORE) {
             break;
         }
     }
-    printf("Félicitation, tu as réussi ton épreuve\n");
+    printf("Félicitation, tu as réussi ton épreuve\n");*/
 
     // exit first task
-    TaskGenerator1_cleanup();*/
+    TaskGenerator1_cleanup();
 
 
     /*********** Second Challenge ***********/
