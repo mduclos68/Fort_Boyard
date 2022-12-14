@@ -221,6 +221,7 @@ static char* ChooseColour(int colour){
 
 static void* TaskGenerator2_Thread(void* _arg){
 
+    long long t, t_diff;
     while(!stopping){
 
         SoundGenerator_init();
