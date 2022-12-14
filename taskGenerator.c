@@ -157,16 +157,16 @@ static void* SoundGenerator_Thread(void* _arg){
         int sound = rand() % 5; 
 
         // sound selection
-        if(sound == RED){
+        if(sound == RED_Select){
             AudioMixer_queueSound(&redSound);
         }
-        else if(sound == BLUE){
+        else if(sound == BLUE_Select){
             AudioMixer_queueSound(&blueSound);
         }
-        else if(sound == GREY){
+        else if(sound == GREY_Select){
             AudioMixer_queueSound(&greySound);
         }
-        else if(sound == GREEN){
+        else if(sound == GREEN_Select){
             AudioMixer_queueSound(&greenSound);
         }
         else{
@@ -224,7 +224,7 @@ static void* TaskGenerator2_Thread(void* _arg){
         
         // choose a number from 0-4
         int colour = rand() % 5;
-        char* TEXT_COULOUR = ChooseTextColour();
+        char* TEXT_COLOUR = ChooseTextColour();
 
         // Colour Selection
         if(colour == RED_Select){
