@@ -20,6 +20,65 @@ int getSuccess(void){
     return success;
 }
 
+
+/*********** Helper Functions ***********/
+static char* ChooseTextColour(int colour){
+    // Colour Selection
+    if(colour == RED_Select){
+        return TEXT_COLOUR_RED;
+    }
+    else if(colour == BLUE_Select){
+        return TEXT_COLOUR_BLUE;
+    }
+    else if(colour == GREY_Select){
+        return TEXT_COLOUR_GREY;
+    }
+    else if(colour == GREEN_Select){
+        return TEXT_COLOUR_GREEN;
+    }
+    else{
+        return TEXT_COLOUR_YELLOW;
+    }
+}
+
+static char* ChooseColour(int colour){
+    // Colour Selection
+    if(colour == RED_Select){
+        return RED;
+    }
+    else if(colour == BLUE_Select){
+        return BLUE;
+    }
+    else if(colour == GREY_Select){
+        return GREY;
+    }
+    else if(colour == GREEN_Select){
+        return GREEN;
+    }
+    else{
+        return YELLOW;
+    }
+}
+
+static void PlayColour(int colour){
+    if(colour == RED_Select){
+        AudioMixer_queueSound(&redSound);
+    }
+    else if(colour == BLUE_Select){
+        AudioMixer_queueSound(&blueSound);
+    }
+    else if(colour == GREY_Select){
+        AudioMixer_queueSound(&greySound);
+    }
+    else if(colour == GREEN_Select){
+        AudioMixer_queueSound(&greenSound);
+    }
+    else{
+        AudioMixer_queueSound(&yellowSound);
+    }
+}
+
+
 /*********** First task ***********/
 
 static void* TaskGenerator1_Thread(void* _arg){
@@ -28,30 +87,13 @@ static void* TaskGenerator1_Thread(void* _arg){
     while(!stopping){
 
         // choose a number for 0-4
-        int colour = rand() % 5;
-
-        // Colour selection
-        if(colour == RED_Select){
-            printf("%s%s\033[0m\n", TEXT_COLOUR_RED, RED);
-            AudioMixer_queueSound(&redSound);
-        }
-        else if(colour == BLUE_Select){
-            printf("%s%s\033[0m\n", TEXT_COLOUR_BLUE, BLUE);
-            AudioMixer_queueSound(&blueSound);
-        }
-        else if(colour == GREY_Select){
-            printf("%s%s\033[0m\n", TEXT_COLOUR_GREY, GREY);
-            AudioMixer_queueSound(&greySound);
-        }
-        else if(colour == GREEN_Select){
-            printf("%s%s\033[0m\n", TEXT_COLOUR_GREEN, GREEN);
-            AudioMixer_queueSound(&greenSound);
-        }
-        else{
-            printf("%s%s\033[0m\n", TEXT_COLOUR_YELLOW, YELLOW);
-            AudioMixer_queueSound(&yellowSound);
-        }
-
+        int colour = rand() % 5;      
+        char* COLOUR = ChooseColour(colour);
+        char* TEXT_COLOUR = ChooseTextColour(colour);
+   
+        // Print the colour name in its colour and play the colour sound
+        printf("%s%s\033[0m\n", TEXT_COLOUR, COLOUR);
+        PlayColour(colour);
 
         Helper_sleepForMs(250);
 
@@ -140,28 +182,13 @@ void TaskGenerator1_cleanup(void){
 static void* SoundGenerator_Thread(void* _arg){
     while(!stoppingSound){
         // choose a number from 0-4
-        int sound = rand() % 5; 
+        int colour = rand() % 5; 
 
-        // sound selection
-        if(sound == RED_Select){
-            AudioMixer_queueSound(&redSound);
-        }
-        else if(sound == BLUE_Select){
-            AudioMixer_queueSound(&blueSound);
-        }
-        else if(sound == GREY_Select){
-            AudioMixer_queueSound(&greySound);
-        }
-        else if(sound == GREEN_Select){
-            AudioMixer_queueSound(&greenSound);
-        }
-        else{
-            AudioMixer_queueSound(&yellowSound);
-        }
+        // Play the sound
+        PlayColour(colour);
 
         Helper_sleepForMs(1500);
     }
-
     return NULL;
 }
 
@@ -181,44 +208,6 @@ static void SoundGenerator_cleanup(void){
 }
 
 
-static char* ChooseTextColour(int colour){
-    // Colour Selection
-    if(colour == RED_Select){
-        return TEXT_COLOUR_RED;
-    }
-    else if(colour == BLUE_Select){
-        return TEXT_COLOUR_BLUE;
-    }
-    else if(colour == GREY_Select){
-        return TEXT_COLOUR_GREY;
-    }
-    else if(colour == GREEN_Select){
-        return TEXT_COLOUR_GREEN;
-    }
-    else{
-        return TEXT_COLOUR_YELLOW;
-    }
-}
-
-static char* ChooseColour(int colour){
-    // Colour Selection
-    if(colour == RED_Select){
-        return RED;
-    }
-    else if(colour == BLUE_Select){
-        return BLUE;
-    }
-    else if(colour == GREY_Select){
-        return GREY;
-    }
-    else if(colour == GREEN_Select){
-        return GREEN;
-    }
-    else{
-        return YELLOW;
-    }
-}
-
 static void* TaskGenerator2_Thread(void* _arg){
 
     long long t, t_diff;
@@ -231,26 +220,9 @@ static void* TaskGenerator2_Thread(void* _arg){
         int text_colour = rand() % 5;        
         char* COLOUR = ChooseColour(colour);
         char* TEXT_COLOUR = ChooseTextColour(text_colour);
-
-        
+    
         printf("%s%s\033[0m\n", TEXT_COLOUR, COLOUR);
-        // Colour Selection
- /*       if(colour == RED_Select){
-            printf("%s%s\033[0m\n", TEXT_COLOUR, RED);
-        }
-        else if(colour == BLUE_Select){
-            printf("%s%s\033[0m\n", TEXT_COLOUR, BLUE);
-        }
-        else if(colour == GREY_Select){
-            printf("%s%s\033[0m\n", TEXT_COLOUR, GREY);
-        }
-        else if(colour == GREEN_Select){
-            printf("%s%s\033[0m\n", TEXT_COLOUR, GREEN);
-        }
-        else{
-            printf("%s%s\033[0m\n", TEXT_COLOUR, YELLOW);
-        }
-*/
+
         // Get time
         t = getTimeInMs();
         t_diff = 0;
