@@ -179,6 +179,7 @@ void TaskGenerator1_cleanup(void){
 
 
 /*********** Second task ***********/
+/*
 static void* SoundGenerator_Thread(void* _arg){
     while(!stoppingSound){
         // choose a number from 0-4
@@ -206,7 +207,7 @@ static void SoundGenerator_cleanup(void){
 
     pthread_join(soundId, NULL);  
 }
-
+*/
 
 static void* TaskGenerator2_Thread(void* _arg){
 
@@ -217,11 +218,13 @@ static void* TaskGenerator2_Thread(void* _arg){
         
         // choose a number from 0-4, choose colours
         int colour = rand() % 5;
-        int text_colour = rand() % 5;        
+        int text_colour = rand() % 5;  
+        int sound_colour = rand() % 5;      
         char* COLOUR = ChooseColour(colour);
         char* TEXT_COLOUR = ChooseTextColour(text_colour);
     
         printf("%s%s\033[0m\n", TEXT_COLOUR, COLOUR);
+        PlayColour(sound_colour);
 
         // Get time
         t = getTimeInMs();
