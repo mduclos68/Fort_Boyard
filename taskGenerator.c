@@ -210,8 +210,10 @@ static void SoundGenerator_cleanup(void){
 */
 
 static void* TaskGenerator2_Thread(void* _arg){
-
+    
+    timeInterval = INIT_TIME_INTERVAL;
     long long t, t_diff;
+    
     while(!stopping){
 
         //SoundGenerator_init();
@@ -231,12 +233,12 @@ static void* TaskGenerator2_Thread(void* _arg){
         t_diff = 0;
 
         // Wait for button press of run out of time
-        while(!isButtonPressed() && (t_diff < INIT_TIME_INTERVAL)){
+        while(!isButtonPressed() && (t_diff < timeInterval)){
             t_diff = getTimeInMs() - t;  
         }
 
         bool goodButton = rightButton(colour);
-        bool onTime = (t_diff < INIT_TIME_INTERVAL); 
+        bool onTime = (t_diff < timeInterval); 
 
         if(goodButton && onTime){
              // add to success count
@@ -244,6 +246,9 @@ static void* TaskGenerator2_Thread(void* _arg){
             AudioMixer_queueSound(&dingSound);
             Helper_sleepForMs(500);
             printf("---\n");
+
+            // reduce time interval
+            timeInterval = 0.87 * timeInterval;
         }
         else{
             if ((!onTime)){
@@ -257,6 +262,7 @@ static void* TaskGenerator2_Thread(void* _arg){
 
             AudioMixer_queueSound(&buzzerSound);
             success = 0;
+            timeInterval = INIT_TIME_INTERVAL;
 
             Helper_sleepForMs(500);
             printf("%s", RESTART_TEXT);
