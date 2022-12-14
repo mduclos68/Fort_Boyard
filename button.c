@@ -30,27 +30,27 @@ static void* buttonThread(void* _arg){
     while(!stopping){
 
         if (GPIO_getValue(RED_GPIO) == 1){
-            colourSelected = RED;
+            colourSelected = RED_Select;
             buttonPressed = true;
         }
 
         else if (GPIO_getValue(BLUE_GPIO) == 1){
-            colourSelected = BLUE;
+            colourSelected = BLUE_Select;
             buttonPressed = true;
         }
 
         else if (GPIO_getValue(GREY_GPIO) == 1){
-            colourSelected = GREY;
+            colourSelected = GREY_Select;
             buttonPressed = true;
         }
 
         else if (GPIO_getValue(GREEN_GPIO) == 1){
-            colourSelected = GREEN;
+            colourSelected = GREEN_Select;
             buttonPressed = true;
         }
 
         else if (GPIO_getValue(YELLOW_GPIO) == 1){
-            colourSelected = YELLOW;
+            colourSelected = YELLOW_Select;
             buttonPressed = true;
         }
 

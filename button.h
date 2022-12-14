@@ -26,11 +26,11 @@
 #define GREEN_PIN  "p9.15"
 #define GREY_PIN   "p9.12"
 
-#define RED     0
-#define BLUE    1
-#define GREY    2
-#define GREEN   3
-#define YELLOW  4
+#define RED_Select     0
+#define BLUE_Select    1
+#define GREY_Select    2
+#define GREEN_Select   3
+#define YELLOW_Select  4
 
 // Initialize button thread
 void Button_init(void);

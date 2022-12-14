@@ -14,7 +14,21 @@ static int success = 0;
 #define INIT_TIME_INTERVAL 1500 // 5 seconds
 static long long timeInterval = INIT_TIME_INTERVAL; 
 
-#define red "\033[91mRouge\033[0m\n"
+// Define colours to make it more convienient ot change languages
+#define RED     "Rouge"
+#define GREEN   "Vert"
+#define GREY    "Gris"
+#define YELLOW  "Jaune"
+#define BLUE    "Blue"
+
+// Code to change the text colour
+#define TEXT_COLOUR_RED    "\033[91m"
+#define TEXT_COLOUR_GREEN  "\033[92m"
+#define TEXT_COLOUR_GREY   "\033[37m"
+#define TEXT_COLOUR_YELLOW "\033[33m"
+#define TEXT_COLOUR_BLUE   "\033[94m"
+
+#define RESTART_TEXT "Pèse sur un bouton pour recommencer.\n"
 
 int getSuccess(void){
     return success;
@@ -31,24 +45,24 @@ static void* TaskGenerator1_Thread(void* _arg){
         int colour = rand() % 5;
 
         // Colour selection
-        if(colour == RED){
-            printf("%s",red);
+        if(colour == RED_Select){
+            printf("%s%s\033[0m\n", TEXT_COLOUR_RED, RED);
             AudioMixer_queueSound(&redSound);
         }
-        else if(colour == BLUE){
-            printf("Bleu\n");
+        else if(colour == BLUE_Select){
+            printf("%s%s\033[0m\n", TEXT_COLOUR_BLUE, BLUE);
             AudioMixer_queueSound(&blueSound);
         }
-        else if(colour == GREY){
-            printf("Gris\n");
+        else if(colour == GREY_Select){
+            printf("%s%s\033[0m\n", TEXT_COLOUR_GREY, GREY);
             AudioMixer_queueSound(&greySound);
         }
-        else if(colour == GREEN){
-            printf("Vert\n");
+        else if(colour == GREEN_Select){
+            printf("%s%s\033[0m\n", TEXT_COLOUR_GREEN, GREEN);
             AudioMixer_queueSound(&greenSound);
         }
         else{
-            printf("Jaune\n");
+            printf("%s%s\033[0m\n", TEXT_COLOUR_YELLOW, YELLOW);
             AudioMixer_queueSound(&yellowSound);
         }
 
@@ -72,12 +86,16 @@ static void* TaskGenerator1_Thread(void* _arg){
             success++;
             printf("---\n");
             AudioMixer_queueSound(&dingSound);
+            
+            // Wait for time interval
             Helper_sleepForMs(timeInterval);
+            
             // reduce time interval
             timeInterval = 0.87 * timeInterval;
-            
         }
         else{
+            Helper_runCommand("clear");
+
             if ((!onTime)){
                 printf("TROP LENT!!!\nTu t'es rendu à %d, recommence!\n", success);
             }
@@ -90,7 +108,7 @@ static void* TaskGenerator1_Thread(void* _arg){
             AudioMixer_queueSound(&buzzerSound);
 
             Helper_sleepForMs(500);
-            printf("Pèse sur un bouton pour recommencer.\n");
+            printf("%s", RESTART_TEXT);
             while(true){
                 if (isButtonPressed()){
                     break;
@@ -176,6 +194,27 @@ static void SoundGenerator_cleanup(void){
     pthread_join(soundId, NULL);  
 }
 
+static char* ChooseTextColour(void){
+        // choose a number from 0-4
+        int colour = rand() % 5;
+
+        // Colour Selection
+        if(colour == RED_Select){
+            return TEXT_COLOUR_RED;
+        }
+        else if(colour == BLUE_Select){
+            return TEXT_COLOUR_BLUE;
+        }
+        else if(colour == GREY_Select){
+            return TEXT_COLOUR_GREY;
+        }
+        else if(colour == GREEN_Select){
+            return TEXT_COLOUR_GREEN;
+        }
+        else{
+            return TEXT_COLOUR_YELLOW;
+        }
+}
 
 static void* TaskGenerator2_Thread(void* _arg){
 
@@ -185,22 +224,23 @@ static void* TaskGenerator2_Thread(void* _arg){
         
         // choose a number from 0-4
         int colour = rand() % 5;
+        char* TEXT_COULOUR = ChooseTextColour();
 
         // Colour Selection
-        if(colour == RED){
-            printf("Rouge\n");
+        if(colour == RED_Select){
+            printf("%s%s\033[0m\n", TEXT_COLOUR, RED);
         }
-        else if(colour == BLUE){
-            printf("Bleu\n");
+        else if(colour == BLUE_Select){
+            printf("%s%s\033[0m\n", TEXT_COLOUR, BLUE);
         }
-        else if(colour == GREY){
-            printf("Gris\n");
+        else if(colour == GREY_Select){
+            printf("%s%s\033[0m\n", TEXT_COLOUR, GREY);
         }
-        else if(colour == GREEN){
-            printf("Vert\n");
+        else if(colour == GREEN_Select){
+            printf("%s%s\033[0m\n", TEXT_COLOUR, GREEN);
         }
         else{
-            printf("Jaune\n");
+            printf("%s%s\033[0m\n", TEXT_COLOUR, YELLOW);
         }
 
         // Wait for button press
@@ -228,14 +268,13 @@ static void* TaskGenerator2_Thread(void* _arg){
             success = 0;
 
             Helper_sleepForMs(500);
-            printf("Pèse sur un bouton pour recommencer.\n");
+            printf("%s", RESTART_TEXT);
             while(true){
                 if (isButtonPressed()){
                     break;
                 }
             }            
             Helper_sleepForMs(1000);
-            SoundGenerator_init();
         }
     }
     
