@@ -214,7 +214,7 @@ static void* TaskGenerator2_Thread(void* _arg){
     long long t, t_diff;
     while(!stopping){
 
-        SoundGenerator_init();
+        //SoundGenerator_init();
         
         // choose a number from 0-4, choose colours
         int colour = rand() % 5;
@@ -253,7 +253,7 @@ static void* TaskGenerator2_Thread(void* _arg){
                 printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
             }
             
-            SoundGenerator_cleanup();
+            //SoundGenerator_cleanup();
 
             AudioMixer_queueSound(&buzzerSound);
             success = 0;
@@ -269,7 +269,7 @@ static void* TaskGenerator2_Thread(void* _arg){
         }
     }
     
-    SoundGenerator_cleanup();
+    //SoundGenerator_cleanup();
     AudioMixer_queueSound(&winSound);
 
     return NULL;
