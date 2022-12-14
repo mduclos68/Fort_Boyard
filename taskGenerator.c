@@ -2,7 +2,7 @@
 
 // define thread variables
 static bool stopping = false;
-static bool stoppingSound = false;
+//static bool stoppingSound = false;
 static pthread_t task1Id, task2Id, soundId;
 
 // Define pSounds
