@@ -2,7 +2,6 @@
 
 // define thread variables
 static bool stopping = false;
-//static bool stoppingSound = false;
 static pthread_t task1Id, task2Id, soundId;
 
 // Define pSounds
@@ -213,10 +212,8 @@ static void* TaskGenerator2_Thread(void* _arg){
     
     timeInterval = INIT_TIME_INTERVAL;
     long long t, t_diff;
-    
-    while(!stopping){
 
-        //SoundGenerator_init();
+    while(!stopping){
         
         // choose a number from 0-4, choose colours
         int colour = rand() % 5;
@@ -248,7 +245,7 @@ static void* TaskGenerator2_Thread(void* _arg){
             printf("---\n");
 
             // reduce time interval
-            timeInterval = 0.87 * timeInterval;
+            timeInterval = 0.95 * timeInterval;
         }
         else{
             if ((!onTime)){
@@ -257,8 +254,6 @@ static void* TaskGenerator2_Thread(void* _arg){
             else{
                 printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
             }
-            
-            //SoundGenerator_cleanup();
 
             AudioMixer_queueSound(&buzzerSound);
             success = 0;
@@ -275,7 +270,6 @@ static void* TaskGenerator2_Thread(void* _arg){
         }
     }
     
-    //SoundGenerator_cleanup();
     AudioMixer_queueSound(&winSound);
 
     return NULL;
