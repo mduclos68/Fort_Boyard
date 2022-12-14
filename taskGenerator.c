@@ -19,7 +19,7 @@ static long long timeInterval = INIT_TIME_INTERVAL;
 #define GREEN   "Vert"
 #define GREY    "Gris"
 #define YELLOW  "Jaune"
-#define BLUE    "Blue"
+#define BLUE    "Bleu"
 
 // Code to change the text colour
 #define TEXT_COLOUR_RED    "\033[91m"
@@ -29,6 +29,7 @@ static long long timeInterval = INIT_TIME_INTERVAL;
 #define TEXT_COLOUR_BLUE   "\033[94m"
 
 #define RESTART_TEXT "Pèse sur un bouton pour recommencer.\n"
+#define TOO_SLOW_TEXT "TROP LENT!!!\nTu t'es rendu à %d, recommence!\n"
 
 int getSuccess(void){
     return success;
@@ -100,7 +101,7 @@ static void* TaskGenerator1_Thread(void* _arg){
                 printf("TROP LENT!!!\nTu t'es rendu à %d, recommence!\n", success);
             }
             else{
-                printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
+                printf("%s", TOO_SLOW_TEXT, success);
             }
             
             success = 0;
