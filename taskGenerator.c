@@ -14,20 +14,6 @@ static int success = 0;
 #define INIT_TIME_INTERVAL 1500 // 5 seconds
 static long long timeInterval = INIT_TIME_INTERVAL; 
 
-// Define colours to make it more convienient ot change languages
-#define RED     "Rouge"
-#define GREEN   "Vert"
-#define GREY    "Gris"
-#define YELLOW  "Jaune"
-#define BLUE    "Bleu"
-
-// Code to change the text colour
-#define TEXT_COLOUR_RED    "\033[91m"
-#define TEXT_COLOUR_GREEN  "\033[92m"
-#define TEXT_COLOUR_GREY   "\033[37m"
-#define TEXT_COLOUR_YELLOW "\033[33m"
-#define TEXT_COLOUR_BLUE   "\033[94m"
-
 #define RESTART_TEXT "Pèse sur un bouton pour recommencer.\n"
 
 int getSuccess(void){
@@ -195,28 +181,43 @@ static void SoundGenerator_cleanup(void){
 }
 
 
-static char* ChooseTextColour(void){
-        // choose a number from 0-4
-        int colour = rand() % 5;
-
-        // Colour Selection
-        if(colour == RED_Select){
-            return TEXT_COLOUR_RED;
-        }
-        else if(colour == BLUE_Select){
-            return TEXT_COLOUR_BLUE;
-        }
-        else if(colour == GREY_Select){
-            return TEXT_COLOUR_GREY;
-        }
-        else if(colour == GREEN_Select){
-            return TEXT_COLOUR_GREEN;
-        }
-        else{
-            return TEXT_COLOUR_YELLOW;
-        }
+static char* ChooseTextColour(int colour){
+    // Colour Selection
+    if(colour == RED_Select){
+        return TEXT_COLOUR_RED;
+    }
+    else if(colour == BLUE_Select){
+        return TEXT_COLOUR_BLUE;
+    }
+    else if(colour == GREY_Select){
+        return TEXT_COLOUR_GREY;
+    }
+    else if(colour == GREEN_Select){
+        return TEXT_COLOUR_GREEN;
+    }
+    else{
+        return TEXT_COLOUR_YELLOW;
+    }
 }
 
+static char* ChooseColour(int colour){
+    // Colour Selection
+    if(colour == RED_Select){
+        return RED;
+    }
+    else if(colour == BLUE_Select){
+        return BLUE;
+    }
+    else if(colour == GREY_Select){
+        return GREY;
+    }
+    else if(colour == GREEN_Select){
+        return GREEN;
+    }
+    else{
+        return YELLOW;
+    }
+}
 
 static void* TaskGenerator2_Thread(void* _arg){
 
@@ -224,12 +225,16 @@ static void* TaskGenerator2_Thread(void* _arg){
 
         SoundGenerator_init();
         
-        // choose a number from 0-4
+        // choose a number from 0-4, choose colours
         int colour = rand() % 5;
-        char* TEXT_COLOUR = ChooseTextColour();
+        int text_colour = rand() % 5;        
+        char* COLOUR = ChooseColour(colour);
+        char* TEXT_COLOUR = ChooseTextColour(text_colour);
 
+        
+        printf("%s%s\033[0m\n", TEXT_COLOUR, COLOUR);
         // Colour Selection
-        if(colour == RED_Select){
+ /*       if(colour == RED_Select){
             printf("%s%s\033[0m\n", TEXT_COLOUR, RED);
         }
         else if(colour == BLUE_Select){
@@ -244,27 +249,33 @@ static void* TaskGenerator2_Thread(void* _arg){
         else{
             printf("%s%s\033[0m\n", TEXT_COLOUR, YELLOW);
         }
+*/
+        // Get time
+        t = getTimeInMs();
+        t_diff = 0;
 
-        // Wait for button press
-        while(true){
-            if (isButtonPressed()){
-                break;
-            }
-        } 
+        // Wait for button press of run out of time
+        while(!isButtonPressed() && (t_diff < INIT_TIME_INTERVAL)){
+            t_diff = getTimeInMs() - t;  
+        }
 
         bool goodButton = rightButton(colour);
-        
-        if(goodButton){
-            // add to success count
+        bool onTime = (t_diff < INIT_TIME_INTERVAL); 
+
+        if(goodButton && onTime){
+             // add to success count
             success++;
             AudioMixer_queueSound(&dingSound);
             Helper_sleepForMs(500);
             printf("---\n");
         }
         else{
-            
-            Helper_runCommand("clear");
-            printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
+            if ((!onTime)){
+                printf("TROP LENT!!!\nTu t'es rendu à %d, recommence!\n", success);
+            }
+            else{
+                printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
+            }
             
             SoundGenerator_cleanup();
 

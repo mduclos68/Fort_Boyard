@@ -38,25 +38,23 @@ int main()
     printf("Tu dois obtenir un score de %d pour réussir cette épreuve. Bonne chance!\n", SCORE);
     TaskGenerator1_init();
 
-    /*// Wait for user to obtain the right score to exit the game
+    // Wait for user to obtain the right score to exit the game
     while (true) {
         if (getSuccess() == SCORE) {
             break;
         }
     }
-    printf("Félicitation, tu as réussi ton épreuve\n");*/
+    printf("Félicitation, tu as réussi ton épreuve\n");
 
     // exit first task
     TaskGenerator1_cleanup();
 
-    
-    Helper_runCommand("clear");
-
     /*********** Second Challenge ***********/
-    /* Félicitation, tu as réussi la première épreuve. La deuxième épreuve s'appelle le chaos des sons. 
+    /* Félicitation, tu as réussi la première épreuve. La deuxième épreuve s'appelle le chaos des couleurs. 
     Tu comprendras assez vite pourquoi. La seule chose à savoir pour cette épreuve cest que tu dois peser
     sur le bouton correspondant à la couleur écrite sur l'écran. Les vois ne te seront pas utiles dans cette
-    épreuve. Tu dois obtenir 10 bons résultats de suite pour passé à l'étape suivante. Bonne chance!
+    épreuve. Ne te laisse pas déjouer par la couleur des mots, choisis la couleur inscrite et non la couleur du mot.
+    Tu dois obtenir 10 bons résultats de suite pour passé à l'étape suivante. Bonne chance!
     */
     Helper_sleepForMs(2000);
     printf("Tu dois obtenir un score de %d pour réussir cette épreuve. Bonne chance!\n", SCORE);

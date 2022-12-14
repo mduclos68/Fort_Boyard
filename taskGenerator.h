@@ -25,6 +25,21 @@
 #define WIN_AUDIO      "colour-wav-files/win.wav"
 #define DING_AUDIO     "colour-wav-files/ding.wav"
 
+// Define colours to make it more convienient ot change languages
+#define RED     "Rouge"
+#define GREEN   "Vert"
+#define GREY    "Gris"
+#define YELLOW  "Jaune"
+#define BLUE    "Bleu"
+
+// Code to change the text colour
+#define TEXT_COLOUR_RED    "\033[91m"
+#define TEXT_COLOUR_GREEN  "\033[92m"
+#define TEXT_COLOUR_GREY   "\033[37m"
+#define TEXT_COLOUR_YELLOW "\033[33m"
+#define TEXT_COLOUR_BLUE   "\033[94m"
+
+
 void TaskGenerator1_init(void);
 
 void TaskGenerator1_cleanup(void);
