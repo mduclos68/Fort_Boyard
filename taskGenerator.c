@@ -14,6 +14,7 @@ static int success = 0;
 #define INIT_TIME_INTERVAL 1500 // 5 seconds
 static long long timeInterval = INIT_TIME_INTERVAL; 
 
+#define red "\033[91mRouge\033[0m\n"
 
 int getSuccess(void){
     return success;
@@ -31,7 +32,7 @@ static void* TaskGenerator1_Thread(void* _arg){
 
         // Colour selection
         if(colour == RED){
-            printf("Rouge\n");
+            printf("%s",red);
             AudioMixer_queueSound(&redSound);
         }
         else if(colour == BLUE){
