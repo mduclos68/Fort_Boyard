@@ -49,6 +49,8 @@ int main()
     // exit first task
     TaskGenerator1_cleanup();
 
+    
+    Helper_runCommand("clear");
 
     /*********** Second Challenge ***********/
     /* Félicitation, tu as réussi la première épreuve. La deuxième épreuve s'appelle le chaos des sons. 
