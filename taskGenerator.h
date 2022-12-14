@@ -36,7 +36,7 @@
 #define TEXT_COLOUR_RED    "\033[91m"
 #define TEXT_COLOUR_GREEN  "\033[92m"
 #define TEXT_COLOUR_GREY   "\033[37m"
-#define TEXT_COLOUR_YELLOW "\033[33m"
+#define TEXT_COLOUR_YELLOW "\033[33;1m"
 #define TEXT_COLOUR_BLUE   "\033[94m"
 
 
