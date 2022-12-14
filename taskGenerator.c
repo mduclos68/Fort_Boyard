@@ -29,7 +29,6 @@ static long long timeInterval = INIT_TIME_INTERVAL;
 #define TEXT_COLOUR_BLUE   "\033[94m"
 
 #define RESTART_TEXT "Pèse sur un bouton pour recommencer.\n"
-#define TOO_SLOW_TEXT "TROP LENT!!!\nTu t'es rendu à %d, recommence!\n"
 
 int getSuccess(void){
     return success;
@@ -101,7 +100,7 @@ static void* TaskGenerator1_Thread(void* _arg){
                 printf("TROP LENT!!!\nTu t'es rendu à %d, recommence!\n", success);
             }
             else{
-                printf("%s", TOO_SLOW_TEXT, success);
+                printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
             }
             
             success = 0;
@@ -195,6 +194,7 @@ static void SoundGenerator_cleanup(void){
     pthread_join(soundId, NULL);  
 }
 
+
 static char* ChooseTextColour(void){
         // choose a number from 0-4
         int colour = rand() % 5;
@@ -216,6 +216,7 @@ static char* ChooseTextColour(void){
             return TEXT_COLOUR_YELLOW;
         }
 }
+
 
 static void* TaskGenerator2_Thread(void* _arg){
 
@@ -261,6 +262,8 @@ static void* TaskGenerator2_Thread(void* _arg){
             printf("---\n");
         }
         else{
+            
+            Helper_runCommand("clear");
             printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
             
             SoundGenerator_cleanup();
