@@ -14,8 +14,8 @@
 #include <alsa/asoundlib.h>
 
 #define SCORE 5
-#define SPEECH_LENGTH_START  28000
-#define SPEECH_LENGHT_TASK_1 28000
+#define SPEECH_LENGTH_START  30000
+#define SPEECH_LENGHT_TASK_1 30000
 #define SPEECH_LENGHT_TASK_2 28000
 #define SPEECH_LENGHT_TASK_3 34000
 
@@ -107,7 +107,7 @@ int main()
     // cleanup audio, button and task generator
     AudioMixer_freeWaveFileData(&pSound);
     AudioMixer_freeWaveFileData(&pSound1);
-    
+
     closeSoundFiles();
     AudioMixer_cleanup(); 
     Button_cleanup();

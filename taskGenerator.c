@@ -108,6 +108,9 @@ static void* TaskGenerator1_Thread(void* _arg){
 
     long long t, t_diff;
     while(!stopping){
+        
+        // Wait for time interval
+        Helper_sleepForMs(timeInterval);
 
         // choose a number for 0-4
         int colour = rand() % 5;      
@@ -138,15 +141,10 @@ static void* TaskGenerator1_Thread(void* _arg){
             printf("---\n");
             AudioMixer_queueSound(&dingSound);
             
-            // Wait for time interval
-            Helper_sleepForMs(timeInterval);
-            
             // reduce time interval
             timeInterval = 0.87 * timeInterval;
         }
         else{
-            Helper_runCommand("clear");
-
             if ((!onTime)){
                 printf("TROP LENT!!!\nTu t'es rendu à %d, recommence!\n", success);
             }
@@ -165,7 +163,6 @@ static void* TaskGenerator1_Thread(void* _arg){
                     break;
                 }
             }            
-            Helper_sleepForMs(2000);
         }
     }
 
