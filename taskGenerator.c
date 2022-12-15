@@ -3,7 +3,7 @@
 
 // define thread variables
 static bool stopping = false;
-static pthread_t task1Id, task2Id, soundId;
+static pthread_t task1Id, task2Id, task3Id;
 
 // Define pSounds
 static wavedata_t redSound, blueSound, greenSound, greySound, yellowSound;
@@ -320,7 +320,7 @@ void TaskGenerator2_cleanup(void){
 
 
 /*********** Third Task ***********/
-static void GenerateArray(int &arr[]){
+static void GenerateArray(int &arr){
     for (int i=0; i<10; i++){
         arr[i] = rand() % 4;
     }
@@ -331,7 +331,8 @@ static void* TaskGenerator3_Thread(void* _arg){
     AudioMixer_queueSound(&pSound3);
     Helper_sleepForMs(SPEECH_LENGHT_TASK_3);
 
-    int arr[10] = zeros(1,10);
+    int arr[10];
+    memset(arr, 0, sizeof arr);
 
     while(!stopping){
         // choose colours
