@@ -320,7 +320,7 @@ void TaskGenerator2_cleanup(void){
 
 
 /*********** Third Task ***********/
-static void GenerateArray(int &arr){
+static void GenerateArray(int *arr){
     for (int i=0; i<10; i++){
         arr[i] = rand() % 4;
     }
@@ -336,7 +336,7 @@ static void* TaskGenerator3_Thread(void* _arg){
 
     while(!stopping){
         // choose colours
-        GenerateArray(arr);
+        GenerateArray(&arr);
 
         // Say all 10 colours
         for (int i=0; i<10; i++){
