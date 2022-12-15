@@ -43,7 +43,6 @@ void openSoundFiles(void);
 
 void closeSoundFiles(void);
 
-
 void TaskGenerator1_init(void);
 
 void TaskGenerator1_cleanup(void);

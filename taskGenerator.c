@@ -10,7 +10,7 @@ static wavedata_t buzzerSound, dingSound, winSound;
 
 static int success = 0;
 
-#define INIT_TIME_INTERVAL 1500 // 5 seconds
+#define INIT_TIME_INTERVAL 1500 // 1.5 seconds
 static long long timeInterval = INIT_TIME_INTERVAL; 
 
 #define RESTART_TEXT "Pèse sur un bouton pour recommencer.\n"
@@ -108,9 +108,6 @@ static void* TaskGenerator1_Thread(void* _arg){
 
     long long t, t_diff;
     while(!stopping){
-        
-        // Wait for time interval
-        Helper_sleepForMs(timeInterval);
 
         // choose a number for 0-4
         int colour = rand() % 5;      
@@ -138,8 +135,11 @@ static void* TaskGenerator1_Thread(void* _arg){
         if(goodButton && onTime){
             // add to success count
             success++;
-            printf("---\n");
             AudioMixer_queueSound(&dingSound);
+            printf("---\n");
+            
+            // Wait for time interval
+            Helper_sleepForMs(timeInterval);
             
             // reduce time interval
             timeInterval = 0.87 * timeInterval;
