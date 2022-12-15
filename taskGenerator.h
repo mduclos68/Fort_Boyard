@@ -39,6 +39,10 @@
 #define TEXT_COLOUR_YELLOW "\033[33;1m"
 #define TEXT_COLOUR_BLUE   "\033[94m"
 
+void openSoundFiles(void);
+
+void closeSoundFiles(void);
+
 
 void TaskGenerator1_init(void);
 

@@ -77,6 +77,30 @@ static void PlayColour(int colour){
     }
 }
 
+void openSoundFiles(void){
+    // Open all sound files
+    AudioMixer_readWaveFileIntoMemory(RED_AUDIO, &redSound);
+    AudioMixer_readWaveFileIntoMemory(GREEN_AUDIO, &greenSound);
+    AudioMixer_readWaveFileIntoMemory(GREY_AUDIO, &greySound);
+    AudioMixer_readWaveFileIntoMemory(BLUE_AUDIO, &blueSound);
+    AudioMixer_readWaveFileIntoMemory(YELLOW_AUDIO, &yellowSound);
+    AudioMixer_readWaveFileIntoMemory(BUZZER_AUDIO, &buzzerSound);
+    AudioMixer_readWaveFileIntoMemory(WIN_AUDIO, &winSound);
+    AudioMixer_readWaveFileIntoMemory(DING_AUDIO, &dingSound);
+}
+
+void closeSoundFiles(void){
+    // Free all sound files
+    AudioMixer_freeWaveFileData(&redSound);
+    AudioMixer_freeWaveFileData(&greenSound);
+	AudioMixer_freeWaveFileData(&greySound); 
+    AudioMixer_freeWaveFileData(&yellowSound);
+    AudioMixer_freeWaveFileData(&blueSound); 
+    AudioMixer_freeWaveFileData(&buzzerSound);
+    AudioMixer_freeWaveFileData(&winSound);
+    AudioMixer_freeWaveFileData(&dingSound);
+}
+
 
 /*********** First task ***********/
 
@@ -152,19 +176,6 @@ static void* TaskGenerator1_Thread(void* _arg){
 
 
 void TaskGenerator1_init(void){
-
-    // Open all sound files
-    AudioMixer_readWaveFileIntoMemory(RED_AUDIO, &redSound);
-    AudioMixer_readWaveFileIntoMemory(GREEN_AUDIO, &greenSound);
-    AudioMixer_readWaveFileIntoMemory(GREY_AUDIO, &greySound);
-    AudioMixer_readWaveFileIntoMemory(BLUE_AUDIO, &blueSound);
-    AudioMixer_readWaveFileIntoMemory(YELLOW_AUDIO, &yellowSound);
-    AudioMixer_readWaveFileIntoMemory(BUZZER_AUDIO, &buzzerSound);
-    AudioMixer_readWaveFileIntoMemory(WIN_AUDIO, &winSound);
-    AudioMixer_readWaveFileIntoMemory(DING_AUDIO, &dingSound);
-
-
-    
     // Launch beatGen thread:
     pthread_create(&task1Id, NULL, TaskGenerator1_Thread, NULL);
 }
@@ -289,13 +300,6 @@ void TaskGenerator2_cleanup(void){
     stopping = true;
 
     pthread_join(task2Id, NULL);
-    pthread_join(soundId, NULL);
-
-    // Free all sound files
-    AudioMixer_freeWaveFileData(&redSound);
-    AudioMixer_freeWaveFileData(&greenSound);
-	AudioMixer_freeWaveFileData(&greySound); 
-    AudioMixer_freeWaveFileData(&yellowSound);
-    AudioMixer_freeWaveFileData(&blueSound);   
+    pthread_join(soundId, NULL);  
 }
 

@@ -12,7 +12,18 @@
 #include <ctype.h>
 #include <alsa/asoundlib.h>
 
-#define SCORE 10
+#define SCORE 5
+#define SPEECH_LENGTH_START  27000
+#define SPEECH_LENGHT_TASK_1 27000
+#define SPEECH_LENGHT_TASK_2 27000
+#define SPEECH_LENGHT_TASK_3 33000
+
+#define START_MESSAGE_AUDIO "colour-wav-files/Message_dentree.wav"
+#define TASK1_AUDIO "colour-wav-files/Message_Jeu_1.wav"
+#define TASK2_AUDIO "colour-wav-files/Message_Jeu_2.wav"
+#define TASK3_AUDIO "colour-wav-files/Message_Jeu_3.wav"
+
+static wavedata_t *pSound;
 
 
 int main()
@@ -20,44 +31,39 @@ int main()
     // initialize audio and button
     AudioMixer_init();
     Button_init();
-
+    openSoundFiles();
 
     /*********** First Challenge ***********/
+    // read opening message
+    AudioMixer_readWaveFileIntoMemory(START_MESSAGE_AUDIO, pSound);
+    AudioMixer_queueSound(pSound);
+    Helper_sleepForMs(SPEECH_LENGTH_START);
+    AudioMixer_freeWaveFileData(pSound);
 
-    /*Bienvenue à Fort Boyard. Pour obtenir ton cadeau, tu devras compléter plusieur défis. 
-    Ne t'inqiètes pas, je serais présente tout au long de ton aventure pour te soutenir. Comme tu peux voir,
-    5 boutons sont à ta disponibilité. Ils te seront nécéssaire tout au long de tes épreuves.
-    Ta première épreuve va comme suis: Des couleurs apparaitront sur l'écran une à une. Je nommerais les couleurs
-    en même temps qu'elles seront affiché pour t'aider. À mesure qu'une nouvelle couleur apparait, tu dois peser
-    sur le bouton de la bonne couleur. Si tu pèses sur le mauvais bouton, le jeu recommenceras du tout début. 
-    Tu dois obtenir 10 bons résultats de suite pour passé à l'étape suivante. Je te préviens, plus tu avance 
-    dans le jeu, plus la candence augmentera. Bonne chance!
-    */
-    Helper_sleepForMs(2000); 
+    // Read first task
+    AudioMixer_readWaveFileIntoMemory(TASK1_AUDIO, pSound);
+    AudioMixer_queueSound(pSound);
+    Helper_sleepForMs(SPEECH_LENGHT_TASK_1);
+    AudioMixer_freeWaveFileData(pSound);
 
-    printf("Tu dois obtenir un score de %d pour réussir cette épreuve. Bonne chance!\n", SCORE);
     TaskGenerator1_init();
 
     // Wait for user to obtain the right score to exit the game
     while (true) {
-        if (getSuccess() == 1) {
+        if (getSuccess() == SCORE) {
             break;
         }
     }
-    printf("Félicitation, tu as réussi ton épreuve\n");
 
     // exit first task
     TaskGenerator1_cleanup();
 
     /*********** Second Challenge ***********/
-    /* Félicitation, tu as réussi la première épreuve. La deuxième épreuve s'appelle le chaos des couleurs. 
-    Tu comprendras assez vite pourquoi. La seule chose à savoir pour cette épreuve cest que tu dois peser
-    sur le bouton correspondant à la couleur écrite sur l'écran. Les vois ne te seront pas utiles dans cette
-    épreuve. Ne te laisse pas déjouer par la couleur des mots, choisis la couleur inscrite et non la couleur du mot.
-    Tu dois obtenir 10 bons résultats de suite pour passé à l'étape suivante. Bonne chance!
-    */
-    Helper_sleepForMs(2000);
-    printf("Tu dois obtenir un score de %d pour réussir cette épreuve. Bonne chance!\n", SCORE);
+    // Read second task
+    AudioMixer_readWaveFileIntoMemory(TASK2_AUDIO, pSound);
+    AudioMixer_queueSound(pSound);
+    Helper_sleepForMs(SPEECH_LENGHT_TASK_2);
+    AudioMixer_freeWaveFileData(pSound);
 
     // Start second task
     TaskGenerator2_init();
@@ -68,26 +74,20 @@ int main()
             break;
         }
     }
-    printf("Félicitation, tu as réussi ton épreuve\n");
-    
+
     // exit second task
     TaskGenerator2_cleanup();
     
 
 
     /*********** Third Challenge ***********/
-    /* Wow, tes oreilles on survécu le chaos. Tu est maintenant rendu à ton épreuve finale.
-    Celle-ci testeras ta mémoire. Seulement ceux avec une mémoir d'éléphant peuvent survivre 
-    cette épreuve. Écoute bien parce que rien ne seras écrit sur l'écran pour t'aider. Lorsque le jeux
-    commenceras, une suite de couleur te seras énoncé, tu devras peser sur les boutons dans le bon ordre
-    pour réussir le jeu. Si tu échou, une nouvelle suite de couleur sera énoncé et tu recommenceras 
-    le défi. Prépare tes oreilles, le défi commence maintenant. 
-    */
+    // Read third task
+    AudioMixer_readWaveFileIntoMemory(TASK3_AUDIO, pSound);
+    AudioMixer_queueSound(pSound);
+    Helper_sleepForMs(SPEECH_LENGHT_TASK_3);
+    AudioMixer_freeWaveFileData(pSound);
 
-    /*Helper_sleepForMs(2000);
-    printf("Tu dois obtenir un score de %d pour réussir cette épreuve. Bonne chance!\n", SCORE);
-
-    // Start second task
+    /*// Start second task
     TaskGenerator3_init();
     
     // Wait for user to obtain the right score to exit the game
@@ -96,14 +96,13 @@ int main()
             break;
         }
     }
-    printf("Félicitation, tu as réussi ton épreuve\n");
-    
     // exit second task
     TaskGenerator3_cleanup();*/
 
 
 
     // cleanup audio, button and task generator
+    closeSoundFiles();
     AudioMixer_cleanup(); 
     Button_cleanup();
 
