@@ -329,7 +329,7 @@ static void GenerateArray(int *arr){
     for (int i=0; i<7; i++){
         arr[i] = rand() % 4;
         if (i>0){
-            if (arr[i] = arr[i-1]){
+            if (arr[i] == arr[i-1]){
                 arr[i] = rand() % 4;
             }
         }
