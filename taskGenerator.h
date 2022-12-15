@@ -43,12 +43,12 @@
 #define SPEECH_LENGTH_START  30000
 #define SPEECH_LENGHT_TASK_1 30000
 #define SPEECH_LENGHT_TASK_2 28000
-#define SPEECH_LENGHT_TASK_3 34000
+#define SPEECH_LENGHT_TASK_3 40000
 
 #define START_MESSAGE_AUDIO "colour-wav-files/Message_dentree.wav"
-#define TASK1_AUDIO "colour-wav-files/Message_Jeu_1.wav"
-#define TASK2_AUDIO "colour-wav-files/Message_Jeu_2.wav"
-#define TASK3_AUDIO "colour-wav-files/Message_Jeu_3.wav"
+#define TASK1_AUDIO         "colour-wav-files/Message_Jeu_1.wav"
+#define TASK2_AUDIO         "colour-wav-files/Message_Jeu_2.wav"
+#define TASK3_AUDIO         "colour-wav-files/Message_Jeu_3.wav"
 
 void openSoundFiles(void);
 

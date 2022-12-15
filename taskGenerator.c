@@ -179,7 +179,9 @@ static void* TaskGenerator1_Thread(void* _arg){
                 if (isButtonPressed()){
                     break;
                 }
-            }            
+            } 
+            
+            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");           
         }
     }
 
@@ -200,7 +202,7 @@ void TaskGenerator1_cleanup(void){
     stopping = true;
 
     pthread_join(task1Id, NULL); 
-    printf("\n\n\n\n\n\n\n\n\n\n");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
 
 
@@ -296,7 +298,7 @@ static void* TaskGenerator2_Thread(void* _arg){
                     break;
                 }
             }            
-            Helper_sleepForMs(1000);
+            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); 
         }
     }
     
@@ -320,7 +322,7 @@ void TaskGenerator2_cleanup(void){
     stopping = true;
 
     pthread_join(task2Id, NULL); 
-    printf("\n\n\n\n\n\n\n\n\n\n");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
 
 
@@ -393,7 +395,7 @@ static void* TaskGenerator3_Thread(void* _arg){
     }
     
     AudioMixer_queueSound(&winSound);
-    Helper_sleepForMs(3000);
+    Helper_sleepForMs(10000);
 
     return NULL;
 }
