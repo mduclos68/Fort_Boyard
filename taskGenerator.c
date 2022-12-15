@@ -181,7 +181,7 @@ static void* TaskGenerator1_Thread(void* _arg){
                 }
             } 
             
-            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");           
+            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");           
         }
     }
 
@@ -297,8 +297,9 @@ static void* TaskGenerator2_Thread(void* _arg){
                 if (isButtonPressed()){
                     break;
                 }
-            }            
-            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); 
+            }     
+            Helper_sleepForMs(1000);       
+            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); 
         }
     }
     
@@ -322,7 +323,7 @@ void TaskGenerator2_cleanup(void){
     stopping = true;
 
     pthread_join(task2Id, NULL); 
-    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
 
 

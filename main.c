@@ -13,7 +13,7 @@
 #include <ctype.h>
 #include <alsa/asoundlib.h>
 
-#define SCORE 5
+#define SCORE 8
 
 
 
