@@ -200,6 +200,7 @@ void TaskGenerator1_cleanup(void){
     stopping = true;
 
     pthread_join(task1Id, NULL); 
+    printf("\n\n\n\n\n\n\n\n\n\n");
 }
 
 
@@ -300,6 +301,7 @@ static void* TaskGenerator2_Thread(void* _arg){
     }
     
     AudioMixer_queueSound(&winSound);
+    Helper_sleepForMs(2000);
 
     return NULL;
 }
@@ -318,12 +320,13 @@ void TaskGenerator2_cleanup(void){
     stopping = true;
 
     pthread_join(task2Id, NULL); 
+    printf("\n\n\n\n\n\n\n\n\n\n");
 }
 
 
 /*********** Third Task ***********/
 static void GenerateArray(int *arr){
-    for (int i=0; i<10; i++){
+    for (int i=0; i<7; i++){
         arr[i] = rand() % 4;
     }
 }
@@ -333,15 +336,15 @@ static void* TaskGenerator3_Thread(void* _arg){
     AudioMixer_queueSound(&pSound3);
     Helper_sleepForMs(SPEECH_LENGHT_TASK_3);
 
-    int arr[10];
+    int arr[7];
     memset(arr, 0, sizeof arr);
 
     while(!stopping){
         // choose colours
         GenerateArray(arr);
 
-        // Say all 10 colours
-        for (int i=0; i<10; i++){
+        // Say all 7 colours
+        for (int i=0; i<7; i++){
             PlayColour(arr[i]);
             Helper_sleepForMs(1000);
         }
@@ -382,10 +385,10 @@ static void* TaskGenerator3_Thread(void* _arg){
             }
         }
 
-        
     }
     
     AudioMixer_queueSound(&winSound);
+    Helper_sleepForMs(3000);
 
     return NULL;
 }
