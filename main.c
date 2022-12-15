@@ -51,10 +51,7 @@ int main()
     TaskGenerator2_cleanup();
     
 
-
     /*********** Third Challenge ***********/
-    // Read third task
-
     // Start second task
     TaskGenerator3_init();
     
