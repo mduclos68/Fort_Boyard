@@ -328,6 +328,11 @@ void TaskGenerator2_cleanup(void){
 static void GenerateArray(int *arr){
     for (int i=0; i<7; i++){
         arr[i] = rand() % 4;
+        if (i>0){
+            if (arr[i] = arr[i-1]){
+                arr[i] = rand() % 4;
+            }
+        }
     }
 }
 
@@ -351,7 +356,7 @@ static void* TaskGenerator3_Thread(void* _arg){
         
         int i = 0;
         bool goodButton = true;
-        while(goodButton && success !=10){
+        while(goodButton && success !=7){
             // Wait for button press
             while(!isButtonPressed()){
             }
