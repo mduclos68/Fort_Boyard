@@ -2,6 +2,7 @@
 
 #include "taskGenerator.h"
 #include "helper.h"
+#include "audioMixer.h"
 
 #include <pthread.h>
 #include <stdbool.h>
