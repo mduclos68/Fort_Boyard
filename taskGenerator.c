@@ -1,5 +1,6 @@
 #include "taskGenerator.h"
 
+
 // define thread variables
 static bool stopping = false;
 static pthread_t task1Id, task2Id, soundId;
@@ -7,6 +8,7 @@ static pthread_t task1Id, task2Id, soundId;
 // Define pSounds
 static wavedata_t redSound, blueSound, greenSound, greySound, yellowSound;
 static wavedata_t buzzerSound, dingSound, winSound;
+static wavedata_t pSound, pSound1, pSound2, pSound3;
 
 static int success = 0;
 
@@ -87,6 +89,9 @@ void openSoundFiles(void){
     AudioMixer_readWaveFileIntoMemory(BUZZER_AUDIO, &buzzerSound);
     AudioMixer_readWaveFileIntoMemory(WIN_AUDIO, &winSound);
     AudioMixer_readWaveFileIntoMemory(DING_AUDIO, &dingSound);
+    AudioMixer_readWaveFileIntoMemory(START_MESSAGE_AUDIO, &pSound);
+    AudioMixer_readWaveFileIntoMemory(TASK1_AUDIO, &pSound1);
+    AudioMixer_readWaveFileIntoMemory(TASK2_AUDIO, &pSound2);
 }
 
 void closeSoundFiles(void){
@@ -99,13 +104,23 @@ void closeSoundFiles(void){
     AudioMixer_freeWaveFileData(&buzzerSound);
     AudioMixer_freeWaveFileData(&winSound);
     AudioMixer_freeWaveFileData(&dingSound);
+    AudioMixer_freeWaveFileData(&pSound);
+    AudioMixer_freeWaveFileData(&pSound1);
+    AudioMixer_freeWaveFileData(&pSound2);
 }
 
 
 /*********** First task ***********/
 
 static void* TaskGenerator1_Thread(void* _arg){
+    // read opening message
+    AudioMixer_queueSound(&pSound);
+    Helper_sleepForMs(SPEECH_LENGTH_START);
 
+    // Read first task
+    AudioMixer_queueSound(&pSound1);
+    Helper_sleepForMs(SPEECH_LENGHT_TASK_1);
+    
     long long t, t_diff;
     while(!stopping){
 
@@ -218,7 +233,10 @@ static void SoundGenerator_cleanup(void){
 */
 
 static void* TaskGenerator2_Thread(void* _arg){
-    
+    // Read second task
+    AudioMixer_queueSound(&pSound2);
+    Helper_sleepForMs(SPEECH_LENGHT_TASK_2);
+
     timeInterval = INIT_TIME_INTERVAL;
     long long t, t_diff;
 
@@ -297,7 +315,91 @@ void TaskGenerator2_init(void){
 void TaskGenerator2_cleanup(void){
     stopping = true;
 
-    pthread_join(task2Id, NULL);
-    pthread_join(soundId, NULL);  
+    pthread_join(task2Id, NULL); 
+}
+
+
+/*********** Third Task ***********/
+static void GenerateArray(int &arr[]){
+    for (int i=0; i<10; i++){
+        arr[i] = rand() % 4;
+    }
+}
+
+static void* TaskGenerator3_Thread(void* _arg){
+    // Read third task
+    AudioMixer_queueSound(&pSound3);
+    Helper_sleepForMs(SPEECH_LENGHT_TASK_3);
+
+    int arr[10] = zeros(1,10);
+
+    while(!stopping){
+        // choose colours
+        GenerateArray(arr);
+
+        // Say all 10 colours
+        for (int i=0; i<10; i++){
+            PlayColour(arr[i]);
+            Helper_sleepForMs(1000);
+        }
+        
+        int i = 0;
+        bool goodButton = true;
+        while(goodButton && success !=10){
+            // Wait for button press
+            while(!isButtonPressed()){
+            }
+
+            goodButton = rightButton(arr[i]);
+
+            if(goodButton){
+                // add to success count
+                success++;
+                i++;
+                AudioMixer_queueSound(&dingSound);
+                Helper_sleepForMs(500);
+                printf("---\n");
+
+            }
+            else{
+                printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
+
+                AudioMixer_queueSound(&buzzerSound);
+                success = 0;
+                i=0;
+
+                Helper_sleepForMs(500);
+                printf("%s", RESTART_TEXT);
+                while(true){
+                    if (isButtonPressed()){
+                        break;
+                    }
+                }            
+                Helper_sleepForMs(1000);
+            }
+        }
+
+        
+    }
+    
+    AudioMixer_queueSound(&winSound);
+
+    return NULL;
+}
+
+
+void TaskGenerator3_init(void){
+    stopping = false;
+    success = 0;
+    
+    // Launch thread:
+    pthread_create(&task3Id, NULL, TaskGenerator3_Thread, NULL);
+}
+
+
+void TaskGenerator3_cleanup(void){
+    stopping = true;
+
+    pthread_join(task3Id, NULL);
 }
 

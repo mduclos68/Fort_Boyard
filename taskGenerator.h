@@ -39,6 +39,17 @@
 #define TEXT_COLOUR_YELLOW "\033[33;1m"
 #define TEXT_COLOUR_BLUE   "\033[94m"
 
+
+#define SPEECH_LENGTH_START  30000
+#define SPEECH_LENGHT_TASK_1 30000
+#define SPEECH_LENGHT_TASK_2 28000
+#define SPEECH_LENGHT_TASK_3 34000
+
+#define START_MESSAGE_AUDIO "colour-wav-files/Message_dentree.wav"
+#define TASK1_AUDIO "colour-wav-files/Message_Jeu_1.wav"
+#define TASK2_AUDIO "colour-wav-files/Message_Jeu_2.wav"
+#define TASK3_AUDIO "colour-wav-files/Message_Jeu_3.wav"
+
 void openSoundFiles(void);
 
 void closeSoundFiles(void);
@@ -50,6 +61,10 @@ void TaskGenerator1_cleanup(void);
 void TaskGenerator2_init(void);
 
 void TaskGenerator2_cleanup(void);
+
+void TaskGenerator3_init(void);
+
+void TaskGenerator3_cleanup(void);
 
 int getSuccess(void);
 
