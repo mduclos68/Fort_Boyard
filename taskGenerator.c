@@ -167,6 +167,7 @@ static void* TaskGenerator1_Thread(void* _arg){
     }
 
     AudioMixer_queueSound(&winSound);
+    Helper_sleepForMs(1500);
 
     return NULL;
 }
