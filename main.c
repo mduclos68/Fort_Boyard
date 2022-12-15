@@ -14,10 +14,10 @@
 #include <alsa/asoundlib.h>
 
 #define SCORE 5
-#define SPEECH_LENGTH_START  27000
-#define SPEECH_LENGHT_TASK_1 27000
-#define SPEECH_LENGHT_TASK_2 27000
-#define SPEECH_LENGHT_TASK_3 33000
+#define SPEECH_LENGTH_START  28000
+#define SPEECH_LENGHT_TASK_1 28000
+#define SPEECH_LENGHT_TASK_2 28000
+#define SPEECH_LENGHT_TASK_3 34000
 
 #define START_MESSAGE_AUDIO "colour-wav-files/Message_dentree.wav"
 #define TASK1_AUDIO "colour-wav-files/Message_Jeu_1.wav"
@@ -38,14 +38,14 @@ int main()
     AudioMixer_readWaveFileIntoMemory(START_MESSAGE_AUDIO, &pSound);
     AudioMixer_queueSound(&pSound);
     Helper_sleepForMs(SPEECH_LENGTH_START);
-    AudioMixer_freeWaveFileData(&pSound);
+
 
     // Read first task
-    //wavedata_t *pSound1;
-    AudioMixer_readWaveFileIntoMemory(TASK1_AUDIO, &pSound);
-    AudioMixer_queueSound(&pSound);
+    wavedata_t pSound1;
+    AudioMixer_readWaveFileIntoMemory(TASK1_AUDIO, &pSound1);
+    AudioMixer_queueSound(&pSound1);
     Helper_sleepForMs(SPEECH_LENGHT_TASK_1);
-    AudioMixer_freeWaveFileData(&pSound);
+    
 
     TaskGenerator1_init();
 
@@ -105,6 +105,9 @@ int main()
 
 
     // cleanup audio, button and task generator
+    AudioMixer_freeWaveFileData(&pSound);
+    AudioMixer_freeWaveFileData(&pSound1);
+    
     closeSoundFiles();
     AudioMixer_cleanup(); 
     Button_cleanup();
