@@ -249,8 +249,15 @@ static void* TaskGenerator2_Thread(void* _arg){
         
         // choose a number from 0-4, choose colours
         int colour = rand() % 5;
-        int text_colour = rand() % 5;  
-        int sound_colour = rand() % 5;      
+        int text_colour = rand() % 5; 
+        if (text_colour == colour) {
+            text_colour = (text_colour + 1) % 5; 
+        }
+        int sound_colour = rand() % 5;    
+        if (sound_colour == colour) {
+            sound_colour = (sound_colour + 1) % 5; 
+        }
+
         char* COLOUR = ChooseColour(colour);
         char* TEXT_COLOUR = ChooseTextColour(text_colour);
     
@@ -299,7 +306,7 @@ static void* TaskGenerator2_Thread(void* _arg){
                 }
             }     
             Helper_sleepForMs(1000);       
-            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); 
+            printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); 
         }
     }
     
@@ -323,17 +330,17 @@ void TaskGenerator2_cleanup(void){
     stopping = true;
 
     pthread_join(task2Id, NULL); 
-    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
 
 
 /*********** Third Task ***********/
 static void GenerateArray(int *arr){
     for (int i=0; i<7; i++){
-        arr[i] = rand() % 4;
+        arr[i] = rand() % 5;
         if (i>0){
             if (arr[i] == arr[i-1]){
-                arr[i] = rand() % 4;
+                arr[i] = rand() % 5;
             }
         }
     }
@@ -344,7 +351,7 @@ static void* TaskGenerator3_Thread(void* _arg){
     AudioMixer_queueSound(&pSound3);
     Helper_sleepForMs(SPEECH_LENGHT_TASK_3);
 
-    int arr[7];
+    int arr[8];
     memset(arr, 0, sizeof arr);
 
     while(!stopping){
@@ -352,14 +359,14 @@ static void* TaskGenerator3_Thread(void* _arg){
         GenerateArray(arr);
 
         // Say all 7 colours
-        for (int i=0; i<7; i++){
+        for (int i=0; i<8; i++){
             PlayColour(arr[i]);
             Helper_sleepForMs(1000);
         }
         
         int i = 0;
         bool goodButton = true;
-        while(goodButton && success !=7){
+        while(goodButton && success !=8){
             // Wait for button press
             while(!isButtonPressed()){
             }
@@ -376,6 +383,7 @@ static void* TaskGenerator3_Thread(void* _arg){
 
             }
             else{
+                printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 printf("MAUVAIS BOUTTON!!!\nTu t'es rendu à %d, recommence!\n", success);
 
                 AudioMixer_queueSound(&buzzerSound);

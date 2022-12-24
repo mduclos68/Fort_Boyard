@@ -13,7 +13,7 @@
 #include <ctype.h>
 #include <alsa/asoundlib.h>
 
-#define SCORE 8
+#define SCORE 10
 
 
 
@@ -57,7 +57,7 @@ int main()
     
     // Wait for user to obtain the right score to exit the game
     while (true) {
-        if (getSuccess() == 7) {
+        if (getSuccess() == 8) {
             break;
         }
     }
