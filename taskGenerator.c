@@ -284,7 +284,7 @@ static void* TaskGenerator2_Thread(void* _arg){
             printf("---\n");
 
             // reduce time interval
-            timeInterval = 0.92 * timeInterval;
+            timeInterval = 0.95 * timeInterval;
         }
         else{
             if ((!onTime)){
@@ -351,7 +351,7 @@ static void* TaskGenerator3_Thread(void* _arg){
     AudioMixer_queueSound(&pSound3);
     Helper_sleepForMs(SPEECH_LENGHT_TASK_3);
 
-    int arr[8];
+    int arr[7];
     memset(arr, 0, sizeof arr);
 
     while(!stopping){
@@ -359,14 +359,14 @@ static void* TaskGenerator3_Thread(void* _arg){
         GenerateArray(arr);
 
         // Say all 7 colours
-        for (int i=0; i<8; i++){
+        for (int i=0; i<7; i++){
             PlayColour(arr[i]);
             Helper_sleepForMs(1000);
         }
         
         int i = 0;
         bool goodButton = true;
-        while(goodButton && success !=8){
+        while(goodButton && success !=7){
             // Wait for button press
             while(!isButtonPressed()){
             }
