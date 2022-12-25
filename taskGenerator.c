@@ -336,7 +336,7 @@ void TaskGenerator2_cleanup(void){
 
 /*********** Third Task ***********/
 static void GenerateArray(int *arr){
-    for (int i=0; i<7; i++){
+    for (int i=0; i<8; i++){
         arr[i] = rand() % 5;
         if (i>0){
             if (arr[i] == arr[i-1]){
@@ -351,7 +351,7 @@ static void* TaskGenerator3_Thread(void* _arg){
     AudioMixer_queueSound(&pSound3);
     Helper_sleepForMs(SPEECH_LENGHT_TASK_3);
 
-    int arr[7];
+    int arr[8];
     memset(arr, 0, sizeof arr);
 
     while(!stopping){
@@ -359,14 +359,14 @@ static void* TaskGenerator3_Thread(void* _arg){
         GenerateArray(arr);
 
         // Say all 7 colours
-        for (int i=0; i<7; i++){
+        for (int i=0; i<8; i++){
             PlayColour(arr[i]);
             Helper_sleepForMs(1000);
         }
         
         int i = 0;
         bool goodButton = true;
-        while(goodButton && success !=7){
+        while(goodButton && success !=8){
             // Wait for button press
             while(!isButtonPressed()){
             }
