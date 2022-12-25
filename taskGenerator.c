@@ -250,13 +250,13 @@ static void* TaskGenerator2_Thread(void* _arg){
         // choose a number from 0-4, choose colours
         int colour = rand() % 5;
         int text_colour = rand() % 5; 
-        if (text_colour == colour) {
+        /*if (text_colour == colour) {
             text_colour = (text_colour + 1) % 5; 
-        }
+        }*/
         int sound_colour = rand() % 5;    
-        if (sound_colour == colour) {
+        /*if (sound_colour == colour) {
             sound_colour = (sound_colour + 1) % 5; 
-        }
+        }*/
 
         char* COLOUR = ChooseColour(colour);
         char* TEXT_COLOUR = ChooseTextColour(text_colour);
