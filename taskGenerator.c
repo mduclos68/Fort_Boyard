@@ -8,7 +8,7 @@ static pthread_t task1Id, task2Id, task3Id;
 // Define pSounds
 static wavedata_t redSound, blueSound, greenSound, greySound, yellowSound;
 static wavedata_t buzzerSound, dingSound, winSound;
-static wavedata_t pSound, pSound1, pSound2, pSound3;
+//static wavedata_t pSound, pSound1, pSound2, pSound3;
 
 static int success = 0;
 
