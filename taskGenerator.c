@@ -89,10 +89,10 @@ void openSoundFiles(void){
     AudioMixer_readWaveFileIntoMemory(BUZZER_AUDIO, &buzzerSound);
     AudioMixer_readWaveFileIntoMemory(WIN_AUDIO, &winSound);
     AudioMixer_readWaveFileIntoMemory(DING_AUDIO, &dingSound);
-    AudioMixer_readWaveFileIntoMemory(START_MESSAGE_AUDIO, &pSound);
+    /*AudioMixer_readWaveFileIntoMemory(START_MESSAGE_AUDIO, &pSound);
     AudioMixer_readWaveFileIntoMemory(TASK1_AUDIO, &pSound1);
     AudioMixer_readWaveFileIntoMemory(TASK2_AUDIO, &pSound2);
-    AudioMixer_readWaveFileIntoMemory(TASK3_AUDIO, &pSound3);
+    AudioMixer_readWaveFileIntoMemory(TASK3_AUDIO, &pSound3);*/
 }
 
 void closeSoundFiles(void){
@@ -105,10 +105,10 @@ void closeSoundFiles(void){
     AudioMixer_freeWaveFileData(&buzzerSound);
     AudioMixer_freeWaveFileData(&winSound);
     AudioMixer_freeWaveFileData(&dingSound);
-    AudioMixer_freeWaveFileData(&pSound);
+    /*AudioMixer_freeWaveFileData(&pSound);
     AudioMixer_freeWaveFileData(&pSound1);
     AudioMixer_freeWaveFileData(&pSound2);
-    AudioMixer_freeWaveFileData(&pSound3);
+    AudioMixer_freeWaveFileData(&pSound3);*/
 }
 
 
