@@ -116,12 +116,12 @@ void closeSoundFiles(void){
 
 static void* TaskGenerator1_Thread(void* _arg){
     // read opening message
-    AudioMixer_queueSound(&pSound);
-    Helper_sleepForMs(SPEECH_LENGTH_START);
+    //AudioMixer_queueSound(&pSound);
+    //Helper_sleepForMs(SPEECH_LENGTH_START);
 
     // Read first task
-    AudioMixer_queueSound(&pSound1);
-    Helper_sleepForMs(SPEECH_LENGHT_TASK_1);
+    //AudioMixer_queueSound(&pSound1);
+    //Helper_sleepForMs(SPEECH_LENGHT_TASK_1);
     
     long long t, t_diff;
     while(!stopping){
@@ -239,8 +239,8 @@ static void SoundGenerator_cleanup(void){
 
 static void* TaskGenerator2_Thread(void* _arg){
     // Read second task
-    AudioMixer_queueSound(&pSound2);
-    Helper_sleepForMs(SPEECH_LENGHT_TASK_2);
+    //AudioMixer_queueSound(&pSound2);
+    //Helper_sleepForMs(SPEECH_LENGHT_TASK_2);
 
     timeInterval = INIT_TIME_INTERVAL;
     long long t, t_diff;
@@ -348,8 +348,8 @@ static void GenerateArray(int *arr){
 
 static void* TaskGenerator3_Thread(void* _arg){
     // Read third task
-    AudioMixer_queueSound(&pSound3);
-    Helper_sleepForMs(SPEECH_LENGHT_TASK_3);
+    //AudioMixer_queueSound(&pSound3);
+    //Helper_sleepForMs(SPEECH_LENGHT_TASK_3);
 
     int arr[8];
     memset(arr, 0, sizeof arr);
