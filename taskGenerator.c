@@ -8,9 +8,10 @@ static pthread_t task1Id, task2Id, task3Id;
 // Define pSounds
 static wavedata_t redSound, blueSound, greenSound, greySound, yellowSound;
 static wavedata_t buzzerSound, dingSound, winSound;
-//static wavedata_t pSound, pSound1, pSound2, pSound3;
 
 static int success = 0;
+
+
 
 #define INIT_TIME_INTERVAL 1500 // 1.5 seconds
 static long long timeInterval = INIT_TIME_INTERVAL; 
@@ -89,10 +90,6 @@ void openSoundFiles(void){
     AudioMixer_readWaveFileIntoMemory(BUZZER_AUDIO, &buzzerSound);
     AudioMixer_readWaveFileIntoMemory(WIN_AUDIO, &winSound);
     AudioMixer_readWaveFileIntoMemory(DING_AUDIO, &dingSound);
-    /*AudioMixer_readWaveFileIntoMemory(START_MESSAGE_AUDIO, &pSound);
-    AudioMixer_readWaveFileIntoMemory(TASK1_AUDIO, &pSound1);
-    AudioMixer_readWaveFileIntoMemory(TASK2_AUDIO, &pSound2);
-    AudioMixer_readWaveFileIntoMemory(TASK3_AUDIO, &pSound3);*/
 }
 
 void closeSoundFiles(void){
@@ -105,23 +102,12 @@ void closeSoundFiles(void){
     AudioMixer_freeWaveFileData(&buzzerSound);
     AudioMixer_freeWaveFileData(&winSound);
     AudioMixer_freeWaveFileData(&dingSound);
-    /*AudioMixer_freeWaveFileData(&pSound);
-    AudioMixer_freeWaveFileData(&pSound1);
-    AudioMixer_freeWaveFileData(&pSound2);
-    AudioMixer_freeWaveFileData(&pSound3);*/
 }
 
 
 /*********** First task ***********/
 
 static void* TaskGenerator1_Thread(void* _arg){
-    // read opening message
-    //AudioMixer_queueSound(&pSound);
-    //Helper_sleepForMs(SPEECH_LENGTH_START);
-
-    // Read first task
-    //AudioMixer_queueSound(&pSound1);
-    //Helper_sleepForMs(SPEECH_LENGHT_TASK_1);
     
     long long t, t_diff;
     while(!stopping){
@@ -238,9 +224,6 @@ static void SoundGenerator_cleanup(void){
 */
 
 static void* TaskGenerator2_Thread(void* _arg){
-    // Read second task
-    //AudioMixer_queueSound(&pSound2);
-    //Helper_sleepForMs(SPEECH_LENGHT_TASK_2);
 
     timeInterval = INIT_TIME_INTERVAL;
     long long t, t_diff;
@@ -250,13 +233,7 @@ static void* TaskGenerator2_Thread(void* _arg){
         // choose a number from 0-4, choose colours
         int colour = rand() % 5;
         int text_colour = rand() % 5; 
-        /*if (text_colour == colour) {
-            text_colour = (text_colour + 1) % 5; 
-        }*/
-        int sound_colour = rand() % 5;    
-        /*if (sound_colour == colour) {
-            sound_colour = (sound_colour + 1) % 5; 
-        }*/
+        int sound_colour = rand() % 5;   
 
         char* COLOUR = ChooseColour(colour);
         char* TEXT_COLOUR = ChooseTextColour(text_colour);
